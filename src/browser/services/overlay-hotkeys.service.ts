@@ -58,7 +58,7 @@ export class OverlayHotkeysService extends EventEmitter {
       },
       (hotkey, state) => {
         this.log(`on hotkey '${hotkey.name}' `, state);
-      },
+      }
     );
 
     // reset OSR passthrough
@@ -77,7 +77,7 @@ export class OverlayHotkeysService extends EventEmitter {
         if (state == 'pressed') {
           this.resetOSRPassthrough();
         }
-      },
+      }
     );
 
     // reset zOrder
@@ -96,7 +96,7 @@ export class OverlayHotkeysService extends EventEmitter {
         if (state == 'pressed') {
           this.resetZOrder();
         }
-      },
+      }
     );
   }
 
@@ -105,7 +105,7 @@ export class OverlayHotkeysService extends EventEmitter {
 
     this.overlayApi?.getAllWindows()?.forEach((w) => {
       const overlayOptions = w.overlayOptions;
-      overlayOptions.passthrough = 'passThrough'
+      overlayOptions.passthrough = 'noPassThrough';
     });
   }
 
@@ -114,7 +114,7 @@ export class OverlayHotkeysService extends EventEmitter {
 
     this.overlayApi.getAllWindows()?.forEach((w) => {
       const overlayOptions = w.overlayOptions;
-      overlayOptions.zOrder = 'default'
+      overlayOptions.zOrder = 'default';
     });
   }
 
