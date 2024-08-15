@@ -15,6 +15,7 @@ import {
   kNVENCEncoderMultipass,
   kQuickSyncTargetUsage,
 } from '@overwolf/ow-electron-packages-types';
+import { AudioTracksEnum } from '../../../../common/recorder/audio-trackes-enum';
 
 type FpsOption = 30 | 60 | 90 | 120;
 export const fpsOptions: FpsOption[] = [30, 60, 90, 120];
@@ -49,13 +50,23 @@ export const outputFileFormat: kFileFormat[] = [
 ];
 
 export const audioSampleRate = [44100, 48000];
+/**
+ * None = 0
+ * Track1 = 1
+ * Track2 = 2
+ * Track3 = 4
+ * Track4 = 8
+ * Track5 = 16
+ * Track6 = 32
+ * All = 0xff
+ */
 export const audioTracksArray = [
-  AudioTracks.Track1,
-  AudioTracks.Track2,
-  AudioTracks.Track3,
-  AudioTracks.Track4,
-  AudioTracks.Track5,
-  AudioTracks.Track6,
+  AudioTracksEnum.Track1,
+  AudioTracksEnum.Track2,
+  AudioTracksEnum.Track3,
+  AudioTracksEnum.Track4,
+  AudioTracksEnum.Track5,
+  AudioTracksEnum.Track6,
 ];
 
 export const kAudioTracksMapping = {

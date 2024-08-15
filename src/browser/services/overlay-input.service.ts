@@ -105,8 +105,8 @@ export class OverlayInputService {
       height: height,
       width: width,
       show: true,
-      passthrough: PassthroughType.PassThrough,
-      zOrder: ZOrderType.BottomMost,
+      passthrough: 'passThrough',
+      zOrder: 'bottomMost',
       transparent: true,
       resizable: false,
       webPreferences: {

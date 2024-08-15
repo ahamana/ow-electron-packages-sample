@@ -2,6 +2,7 @@ import React, { ChangeEvent, FC, useContext, useState } from 'react';
 import AppContext from '../../context/app-context';
 import { AudioTracks } from '@overwolf/ow-electron-packages-types';
 import { audioTracksArray, kAudioTracksMapping } from './constants';
+import { AudioTracksEnum } from '../../../../common/recorder/audio-trackes-enum';
 
 const AudioTracksSelection: FC = () => {
   const { recordingOptions, setRecordingOptions } =
@@ -46,20 +47,20 @@ const AudioTracksSelection: FC = () => {
       <button
         style={{
           backgroundColor:
-            recordingOptions?.audioTrack === AudioTracks.All ? 'green' : 'gray',
+            recordingOptions?.audioTrack === AudioTracksEnum.All ? 'green' : 'gray',
         }}
-        onClick={() => onButtonClick(AudioTracks.All)}
+        onClick={() => onButtonClick(AudioTracksEnum.All)}
       >
         All
       </button>
       <button
         style={{
           backgroundColor:
-            recordingOptions?.audioTrack === AudioTracks.None
+            recordingOptions?.audioTrack === AudioTracksEnum.None
               ? 'green'
               : 'gray',
         }}
-        onClick={() => onButtonClick(AudioTracks.None)}
+        onClick={() => onButtonClick(AudioTracksEnum.None)}
       >
         None
       </button>
