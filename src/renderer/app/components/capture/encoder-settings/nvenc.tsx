@@ -22,7 +22,7 @@ const NVENCEncoderSettings: FC = () => {
     setCaptureSettings({ ...captureSettings, videoEncoderSettings });
   };
 
-  if (captureSettings?.videoEncoderSettings?.type !== 'jim_nvenc') {
+  if (captureSettings?.videoEncoderSettings?.type !== 'obs_nvenc_h264_tex') {
     return <></>;
   }
 
