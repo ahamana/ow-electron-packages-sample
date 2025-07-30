@@ -33,16 +33,17 @@ export class Application {
     // for gep supported games goto:
     // https://overwolf.github.io/api/electron/game-events/
     gepService.registerGames([
-      kGepSupportedGameIds.TeamfightTactics,
-      kGameIds.DiabloIV,
-      kGameIds.RocketLeague,
-      kGameIds.PathofExile,
-      kGameIds.VALORANT,
-      kGameIds.Fortnite,
-      kGameIds.Minecraft,
-      kGameIds.LeagueofLegends,
-      kGameIds.Dota2,
-      kGameIds.CS2,
+      // kGepSupportedGameIds.TeamfightTactics,
+      // kGameIds.DiabloIV,
+      // kGameIds.RocketLeague,
+      // kGameIds.PathofExile,
+      // kGameIds.VALORANT,
+      // kGameIds.Fortnite,
+      // kGameIds.Minecraft,
+      // kGameIds.LeagueofLegends,
+      // kGameIds.Dota2,
+      // kGameIds.CS2,
+      kGepSupportedGameIds.VALORANT,
     ]);
   }
 
@@ -67,15 +68,16 @@ export class Application {
   private onOverlayServiceReady() {
     // Which games to support overlay for
     this.overlayService.registerToGames([
-      kGepSupportedGameIds.TeamfightTactics,
-      kGameIds.DiabloIV,
-      kGameIds.RocketLeague,
-      kGameIds.PathofExile,
+      // kGepSupportedGameIds.TeamfightTactics,
+      // kGameIds.DiabloIV,
+      // kGameIds.RocketLeague,
+      // kGameIds.PathofExile,
+      // kGameIds.VALORANT,
+      // kGameIds.Fortnite,
+      // kGameIds.Minecraft,
+      // kGameIds.LeagueofLegends,
+      // kGameIds.Dota2,
       kGameIds.VALORANT,
-      kGameIds.Fortnite,
-      kGameIds.Minecraft,
-      kGameIds.LeagueofLegends,
-      kGameIds.Dota2,
     ]);
   }
 }

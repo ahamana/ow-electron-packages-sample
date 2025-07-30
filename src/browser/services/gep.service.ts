@@ -36,7 +36,10 @@ export class GameEventsService extends EventEmitter {
     await Promise.all(
       this.gepGamesId.map(async (gameId) => {
         try {
-          await this.gepApi.setRequiredFeatures(gameId, ["kill", "death"]);
+          // await this.gepApi.setRequiredFeatures(gameId, ["kill", "death"]);
+          // VALORANT で指定可能な ``features`` は ["game_info","me","match_info","kill","death"]
+          // ※ ``features`` に ``null`` を指定した場合は、すべての ``features`` が有効になる。
+          await this.gepApi.setRequiredFeatures(gameId, null);
         } catch (error) {
           this.emit("log", `error set-required-feature for: ${gameId}`);
         }
@@ -138,11 +141,16 @@ export class GameEventsService extends EventEmitter {
     });
 
     // When a new Info Update is fired
+    // ``args`` で渡ってくる情報は下記を参照（Native 用の情報になるが、ほぼ同等っぽい）
+    // https://dev.overwolf.com/ow-native/live-game-data-gep/supported-games/valorant/
     this.gepApi.on("new-info-update", (e, gameId, ...args) => {
+      this.emit("log", "new-info", gameId, ...args);
       this.emit("gep-info", "new-info", gameId, ...args);
     });
 
     // When a new Game Event is fired
+    // ``args`` で渡ってくる情報は下記を参照（Native 用の情報になるが、ほぼ同等っぽい）
+    // https://dev.overwolf.com/ow-native/live-game-data-gep/supported-games/valorant/
     this.gepApi.on("new-game-event", (e, gameId, ...args) => {
       this.emit("log", "new-event", gameId, ...args);
       this.emit("gep-event", "new-event", gameId, ...args);
