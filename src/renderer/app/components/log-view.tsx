@@ -1,5 +1,5 @@
-import React, { FC, useContext } from 'react';
-import AppContext from '../context/app-context';
+import React, { FC, useContext } from "react";
+import AppContext from "../context/app-context";
 
 const LogView: FC = () => {
   const { logMessages, clearMessages } = useContext(AppContext)?.logs;
@@ -11,14 +11,14 @@ const LogView: FC = () => {
         <div className="span12">
           <textarea
             id="TerminalTextArea"
-            style={{ border: '1px solid gray', width: '100%', height: '200px' }}
-            value={logMessages.join('\r')}
+            style={{ border: "1px solid gray", width: "100%", height: "200px" }}
+            value={logMessages.join("\r")}
             readOnly
           />
           <span className="span1">
             <button
               onClick={clearMessages}
-              style={{ marginTop: '10px' }}
+              style={{ marginTop: "10px" }}
               id="clearTerminalTextAreaBtn"
               className="btn"
             >

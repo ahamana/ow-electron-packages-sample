@@ -5,7 +5,7 @@ export class OverlayActions {
 
   static setExclusiveModeHotkeyBehavior = async (mode) => {
     const { filePaths } = await window.overlay.setExclusiveModeHotkeyBehavior(
-      mode,
+      mode
     );
     return filePaths[0];
   };

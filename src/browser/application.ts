@@ -1,10 +1,13 @@
-import { GameInfo, GameLaunchEvent } from '@overwolf/ow-electron-packages-types';
-import { MainWindowController } from './controllers/main-window.controller';
-import { OverlayService } from './services/overlay.service';
+import {
+  GameInfo,
+  GameLaunchEvent,
+} from "@overwolf/ow-electron-packages-types";
+import { MainWindowController } from "./controllers/main-window.controller";
+import { OverlayService } from "./services/overlay.service";
 import { kGameIds } from "@overwolf/ow-electron-packages-types/game-list";
-import { kGepSupportedGameIds } from '@overwolf/ow-electron-packages-types/gep-supported-games';
-import { GameEventsService } from './services/gep.service';
-import { RecordingService } from './services/recording.service';
+import { kGepSupportedGameIds } from "@overwolf/ow-electron-packages-types/gep-supported-games";
+import { GameEventsService } from "./services/gep.service";
+import { RecordingService } from "./services/recording.service";
 
 export class Application {
   /**
@@ -14,18 +17,18 @@ export class Application {
     private readonly overlayService: OverlayService,
     private readonly gepService: GameEventsService,
     private readonly recordingService: RecordingService,
-    private readonly mainWindowController: MainWindowController) {
+    private readonly mainWindowController: MainWindowController
+  ) {
+    overlayService.on("ready", this.onOverlayServiceReady.bind(this));
 
-    overlayService.on('ready', this.onOverlayServiceReady.bind(this));
-
-    overlayService.on('injection-decision-handling', (
-      event: GameLaunchEvent,
-      gameInfo: GameInfo
-    ) => {
-      // Always inject because we tell it which games we want in
-      // onOverlayServiceReady
-      event.inject();
-    })
+    overlayService.on(
+      "injection-decision-handling",
+      (event: GameLaunchEvent, gameInfo: GameInfo) => {
+        // Always inject because we tell it which games we want in
+        // onOverlayServiceReady
+        event.inject();
+      }
+    );
 
     // for gep supported games goto:
     // https://overwolf.github.io/api/electron/game-events/
@@ -39,7 +42,7 @@ export class Application {
       kGameIds.Minecraft,
       kGameIds.LeagueofLegends,
       kGameIds.Dota2,
-      kGameIds.CS2
+      kGameIds.CS2,
     ]);
   }
 

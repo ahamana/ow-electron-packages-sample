@@ -1,5 +1,5 @@
-import React, { ChangeEvent, FC, useContext, useState } from 'react';
-import AppContext from '../../context/app-context';
+import React, { ChangeEvent, FC, useContext, useState } from "react";
+import AppContext from "../../context/app-context";
 
 // -----------------------------------------------------------------------------
 const CaptureReplay: FC = () => {
@@ -13,8 +13,9 @@ const CaptureReplay: FC = () => {
           type="text"
           value={replayOptions?.bufferSecond ?? 30000}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            let value: number =
-              parseInt(e.target.value) ? parseInt(e.target.value) : 0 ;
+            let value: number = parseInt(e.target.value)
+              ? parseInt(e.target.value)
+              : 0;
             setReplayOptions({
               ...replayOptions,
               bufferSecond: value,

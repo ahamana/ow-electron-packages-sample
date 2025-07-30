@@ -10,20 +10,13 @@
       "name": "OW-Electron: Main Process",
       //"preLaunchTask": "npm: build",
       "sourceMaps": true,
-      "outFiles": [
-        "${workspaceFolder}/dist/**/*.js"
-      ],
-      "runtimeArgs": [
-        ".",
-        "--test-ad",
-      ],
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "runtimeArgs": [".", "--test-ad"],
       "outputCapture": "std",
       "windows": {
         "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ow-electron.cmd"
       },
-      "skipFiles": [
-        "<node_internals>/**/*.js"
-      ],
+      "skipFiles": ["<node_internals>/**/*.js"],
       "env": {
         "ELECTRON_DISABLE_SECURITY_WARNINGS": "true",
         "ELECTRON_IS_DEV": "1"
@@ -41,10 +34,7 @@
   "compounds": [
     {
       "name": "Electron: All",
-      "configurations": [
-        "OW-Electron: Main Process",
-        "Electron: Renderer"
-      ]
+      "configurations": ["OW-Electron: Main Process", "Electron: Renderer"]
     }
   ]
 }

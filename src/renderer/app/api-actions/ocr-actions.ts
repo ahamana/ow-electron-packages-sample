@@ -1,5 +1,4 @@
 export class OsrActions {
-
   static openOSR = async () => {
     await window.osr.openOSR();
   };

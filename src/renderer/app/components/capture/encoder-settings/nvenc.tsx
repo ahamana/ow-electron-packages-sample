@@ -1,10 +1,10 @@
-import React, { ChangeEvent, FC, useContext } from 'react';
-import AppContext from '../../../context/app-context';
+import React, { ChangeEvent, FC, useContext } from "react";
+import AppContext from "../../../context/app-context";
 import {
   kAMDEncoderPresetAV1Array,
   kAMDEncoderRateControlArray,
-} from '../constants';
-import { EncoderSettingsAMFAV1 } from '@overwolf/ow-electron-packages-types';
+} from "../constants";
+import { EncoderSettingsAMFAV1 } from "@overwolf/ow-electron-packages-types";
 
 const NVENCEncoderSettings: FC = () => {
   const { captureSettings, setCaptureSettings } =
@@ -22,7 +22,7 @@ const NVENCEncoderSettings: FC = () => {
     setCaptureSettings({ ...captureSettings, videoEncoderSettings });
   };
 
-  if (captureSettings?.videoEncoderSettings?.type !== 'obs_nvenc_h264_tex') {
+  if (captureSettings?.videoEncoderSettings?.type !== "obs_nvenc_h264_tex") {
     return <></>;
   }
 
@@ -35,7 +35,7 @@ const NVENCEncoderSettings: FC = () => {
         ffmpeg Options:
         <input
           type="text"
-          value={vidEncSettings?.ffmpeg_opts ?? ''}
+          value={vidEncSettings?.ffmpeg_opts ?? ""}
           name="ffmpeg_opts"
           onChange={onVideoEncoderSettingChanged}
         />
@@ -56,7 +56,7 @@ const NVENCEncoderSettings: FC = () => {
       <label htmlFor="video-encoder-preset">preset: </label>
       <select
         id="video-encoder-preset"
-        value={vidEncSettings?.preset || ''}
+        value={vidEncSettings?.preset || ""}
         onChange={onVideoEncoderSettingChanged}
         name="preset"
       >
@@ -68,7 +68,7 @@ const NVENCEncoderSettings: FC = () => {
       <label htmlFor="video-encoder-rate_control">Rate Control: </label>
       <select
         id="video-encoder-rate_control"
-        value={vidEncSettings?.rate_control || ''}
+        value={vidEncSettings?.rate_control || ""}
         onChange={onVideoEncoderSettingChanged}
         name="rate_control"
       >
@@ -80,11 +80,11 @@ const NVENCEncoderSettings: FC = () => {
       <label htmlFor="video-encoder-profile">Profile: </label>
       <select
         id="video-encoder-profile"
-        value={vidEncSettings?.profile || 'main'}
+        value={vidEncSettings?.profile || "main"}
         onChange={onVideoEncoderSettingChanged}
         name="profile"
       >
-        {['main']?.map((profile) => (
+        {["main"]?.map((profile) => (
           <option key={profile} label={profile} value={profile} />
         ))}
       </select>

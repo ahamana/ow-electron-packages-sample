@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
-import CaptureActions from './capture-actions';
-import CaptureVideo from './capture-video';
-import CaptureAudio from './capture-audio';
-import CaptureOutputGeneral from './capture-output-general';
-import CaptureSplitting from './capture-splitting';
-import CaptureGeneral from './capture-general';
-import CaptureReplayCapture from './capture-replay-capture';
-import CaptureReplay from './capture-replay';
-import CaptureStatus from './capture-status';
+import React, { FC } from "react";
+import CaptureActions from "./capture-actions";
+import CaptureVideo from "./capture-video";
+import CaptureAudio from "./capture-audio";
+import CaptureOutputGeneral from "./capture-output-general";
+import CaptureSplitting from "./capture-splitting";
+import CaptureGeneral from "./capture-general";
+import CaptureReplayCapture from "./capture-replay-capture";
+import CaptureReplay from "./capture-replay";
+import CaptureStatus from "./capture-status";
 
 // -----------------------------------------------------------------------------
 const Capture: FC = () => {
@@ -15,11 +15,11 @@ const Capture: FC = () => {
     <div>
       <fieldset>
         <legend>Capture:</legend>
-        <span style={{display: 'flex'}}>
+        <span style={{ display: "flex" }}>
           <CaptureActions />
           <CaptureStatus />
         </span>
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: "flex" }}>
           <CaptureGeneral />
           <CaptureSplitting />
           <CaptureReplayCapture />
@@ -27,7 +27,7 @@ const Capture: FC = () => {
         </div>
       </fieldset>
 
-      <fieldset style={{ display: 'flex' }}>
+      <fieldset style={{ display: "flex" }}>
         <legend>Output Settings</legend>
         <CaptureOutputGeneral />
         <CaptureVideo />

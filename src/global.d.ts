@@ -7,12 +7,12 @@ import {
   RecordingInformation,
   RecordingOptions,
   ReplayOptions,
-} from '@overwolf/ow-electron-packages-types';
-import { IRecorderInformation } from './common/recorder/recorder-information';
+} from "@overwolf/ow-electron-packages-types";
+import { IRecorderInformation } from "./common/recorder/recorder-information";
 
 export {};
 
-declare module 'react' {
+declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       owadview: React.DetailedHTMLProps<OwadviewTagProps, HTMLElement>;
@@ -55,8 +55,8 @@ declare global {
     setRecordingOptions: (options: RecordingOptions) => void;
     setReplayCaptureOptions: (options: CaptureReplayOptions) => void;
     setReplayOptions: (options: ReplayOptions) => void;
-    onCaptureSettingsChanged: (callback) => void
-    onRecordingStatusChanged: (callback) => void
-    onRecordingStatsChanged: (callback) => void
+    onCaptureSettingsChanged: (callback) => void;
+    onRecordingStatusChanged: (callback) => void;
+    onRecordingStatsChanged: (callback) => void;
   }
 }

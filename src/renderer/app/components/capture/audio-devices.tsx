@@ -1,10 +1,10 @@
-import React, { ChangeEvent, FC, useContext, useEffect, useState } from 'react';
-import AppContext from '../../context/app-context';
+import React, { ChangeEvent, FC, useContext, useEffect, useState } from "react";
+import AppContext from "../../context/app-context";
 import {
   AudioDeviceSettingsInfo,
   AudioDeviceType,
-} from '@overwolf/ow-electron-packages-types';
-import { RecordingActions } from '../../api-actions/recording-actions';
+} from "@overwolf/ow-electron-packages-types";
+import { RecordingActions } from "../../api-actions/recording-actions";
 
 const AudioDevices: FC = () => {
   const { recordingInfo, captureSettings } = useContext(AppContext)?.recording;
@@ -28,11 +28,11 @@ const AudioDevices: FC = () => {
 
   const handleOnInputChange = (
     e: ChangeEvent<HTMLSelectElement>,
-    type: AudioDeviceType,
+    type: AudioDeviceType
   ) => {
     let ids: string[] = Array.from(
       e.target.selectedOptions,
-      (option) => option.value,
+      (option) => option.value
     );
 
     let audioDevices: AudioDeviceSettingsInfo[] = [];
@@ -49,23 +49,23 @@ const AudioDevices: FC = () => {
       });
     }
 
-    const selectedOutput = selectedDevices.filter((d) => d.type === 'output');
+    const selectedOutput = selectedDevices.filter((d) => d.type === "output");
     setSelectedDevices([...selectedOutput, ...audioDevices]);
   };
 
   const handleOutputChange = (
     e: ChangeEvent<HTMLSelectElement>,
-    type: AudioDeviceType,
+    type: AudioDeviceType
   ) => {
     let ids: string[] = Array.from(
       e.target.selectedOptions,
-      (option) => option.value,
+      (option) => option.value
     );
 
     let audioDevices: AudioDeviceSettingsInfo[] = [];
     for (const id of ids) {
       const device = recordingInfo?.audio?.outputDevices.find(
-        (i) => i.id == id,
+        (i) => i.id == id
       );
 
       if (!device) {
@@ -79,7 +79,7 @@ const AudioDevices: FC = () => {
       });
     }
 
-    const selectedInputs = selectedDevices.filter((d) => d.type === 'input');
+    const selectedInputs = selectedDevices.filter((d) => d.type === "input");
     setSelectedDevices([...selectedInputs, ...audioDevices]);
   };
 
@@ -97,7 +97,7 @@ const AudioDevices: FC = () => {
       <fieldset>
         <legend>Input:</legend>
         <label>
-          <select multiple onChange={(e) => handleOnInputChange(e, 'input')}>
+          <select multiple onChange={(e) => handleOnInputChange(e, "input")}>
             {recordingInfo?.audio?.inputDevices?.map((input) => {
               return (
                 <option
@@ -105,8 +105,8 @@ const AudioDevices: FC = () => {
                   key={input.id}
                   style={{
                     backgroundColor: selectedInputNames?.includes(input.id)
-                      ? 'lightcyan'
-                      : 'white',
+                      ? "lightcyan"
+                      : "white",
                   }}
                 >
                   {input?.name}
@@ -119,7 +119,7 @@ const AudioDevices: FC = () => {
       <fieldset>
         <legend>Output:</legend>
         <label>
-          <select multiple onChange={(e) => handleOutputChange(e, 'output')}>
+          <select multiple onChange={(e) => handleOutputChange(e, "output")}>
             {recordingInfo?.audio?.outputDevices?.map((output) => {
               return (
                 <option
@@ -127,8 +127,8 @@ const AudioDevices: FC = () => {
                   key={output.id}
                   style={{
                     backgroundColor: selectedOutputNames?.includes(output.id)
-                      ? 'lightcyan'
-                      : 'white',
+                      ? "lightcyan"
+                      : "white",
                   }}
                 >
                   {output?.name}

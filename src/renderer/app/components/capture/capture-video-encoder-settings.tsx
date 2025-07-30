@@ -1,7 +1,7 @@
-import React, { ChangeEvent, FC, useContext, useState } from 'react';
-import CaptureVideoEncoderAdvancedSettings from './capture-video-encoder-advanced-settings';
-import { kSupportedEncodersTypes } from '@overwolf/ow-electron-packages-types';
-import AppContext from '../../context/app-context';
+import React, { ChangeEvent, FC, useContext, useState } from "react";
+import CaptureVideoEncoderAdvancedSettings from "./capture-video-encoder-advanced-settings";
+import { kSupportedEncodersTypes } from "@overwolf/ow-electron-packages-types";
+import AppContext from "../../context/app-context";
 
 const CaptureVideoEncoderSettings: FC = () => {
   const {
@@ -28,10 +28,10 @@ const CaptureVideoEncoderSettings: FC = () => {
 
   const onVideoEncoderChanged = (e: ChangeEvent<HTMLSelectElement>) => {
     let value = e.target.value as kSupportedEncodersTypes;
-      setCaptureSettings({
-        ...captureSettings,
-        videoEncoderSettings: {type : value}
-      })
+    setCaptureSettings({
+      ...captureSettings,
+      videoEncoderSettings: { type: value },
+    });
 
     setCaptureSettingsOptions({
       ...captureSettingsOptions,
@@ -48,15 +48,15 @@ const CaptureVideoEncoderSettings: FC = () => {
           type="checkbox"
           checked={showAdvanced}
           onChange={(e) => setShowAdvanced(e.target.checked)}
-          />
-          Show Advanced:
+        />
+        Show Advanced:
       </label>
       <br />
       <br />
       <label htmlFor="video-encoders">Video Encoder: </label>
       <select
         id="video-encoders"
-        value={captureSettingsOptions?.videoEncoder ?? ''}
+        value={captureSettingsOptions?.videoEncoder ?? ""}
         onChange={onVideoEncoderChanged}
       >
         {recordingInfo?.video?.encoders?.map((encoder) => (
@@ -77,7 +77,9 @@ const CaptureVideoEncoderSettings: FC = () => {
           value={captureSettings?.videoEncoderSettings?.bitrate ?? 1}
           name="bitrate"
           step="10"
-          title={`Bitrate: ${captureSettings?.videoEncoderSettings?.bitrate ?? 1} `}
+          title={`Bitrate: ${
+            captureSettings?.videoEncoderSettings?.bitrate ?? 1
+          } `}
           onChange={onVideoEncoderSettingChanged}
         />
       </label>

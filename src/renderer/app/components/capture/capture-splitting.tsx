@@ -1,5 +1,5 @@
-import React, { ChangeEvent, FC, useContext } from 'react';
-import AppContext from '../../context/app-context';
+import React, { ChangeEvent, FC, useContext } from "react";
+import AppContext from "../../context/app-context";
 
 // -----------------------------------------------------------------------------
 const CaptureSplitting: FC = () => {
@@ -30,7 +30,7 @@ const CaptureSplitting: FC = () => {
             Max Split time (sec)
             <input
               type="text"
-              value={recordingOptions?.split?.maxTimeSecond ?? ''}
+              value={recordingOptions?.split?.maxTimeSecond ?? ""}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 let value: number = parseInt(e.target.value)
                   ? parseInt(e.target.value)
@@ -49,7 +49,7 @@ const CaptureSplitting: FC = () => {
             Max Split size (MB)
             <input
               type="text"
-              value={recordingOptions?.split?.maxBySizeMB ?? ''}
+              value={recordingOptions?.split?.maxBySizeMB ?? ""}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 let value: number = parseInt(e.target.value)
                   ? parseInt(e.target.value)

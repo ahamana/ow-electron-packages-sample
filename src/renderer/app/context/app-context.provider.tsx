@@ -1,5 +1,5 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react';
-import AppContext from './app-context';
+import React, { FC, ReactNode, useEffect, useState } from "react";
+import AppContext from "./app-context";
 import {
   CaptureReplayOptions,
   CaptureSettings,
@@ -15,10 +15,10 @@ import {
   RecordingOptions,
   ReplayOptions,
   VideoEncoderSettingsBase,
-} from '@overwolf/ow-electron-packages-types';
-import { RecordingActions } from '../api-actions/recording-actions';
-import { AppActions } from '../api-actions/app-actions';
-import { RecordingStatus } from '../../../common/recorder/recording-status';
+} from "@overwolf/ow-electron-packages-types";
+import { RecordingActions } from "../api-actions/recording-actions";
+import { AppActions } from "../api-actions/app-actions";
+import { RecordingStatus } from "../../../common/recorder/recording-status";
 
 interface Props {
   children: ReactNode;
@@ -55,14 +55,13 @@ const AppContextProvider: FC<Props> = ({ children }): JSX.Element => {
     useState<CaptureSettingsOptions>();
 
   const [recordingStatus, setRecordingStatus] =
-    useState<RecordingStatus>('stopped');
+    useState<RecordingStatus>("stopped");
 
-  const [recordingStats, setRecordingStats] =
-    useState<RecorderStats>();
+  const [recordingStats, setRecordingStats] = useState<RecorderStats>();
   // ---------------------------------------------------------------------------
   const newLogMessage = (message: string) => {
     setLogMessages((prevMessages) => {
-      console.log('message', message);
+      console.log("message", message);
       return [...prevMessages, `${message}`];
     });
   };
@@ -96,8 +95,8 @@ const AppContextProvider: FC<Props> = ({ children }): JSX.Element => {
       _setCaptureSettings(settings.captureSettings);
 
       setSelectedDisplays(
-        settings.information.monitors.find(
-          (d) => d?.isPrimary).altId);
+        settings.information.monitors.find((d) => d?.isPrimary).altId
+      );
 
       const recordingOptions = settings.recordingOptions;
       if (!recordingOptions) {
@@ -105,7 +104,7 @@ const AppContextProvider: FC<Props> = ({ children }): JSX.Element => {
       }
 
       _setRecordingOptions(recordingOptions);
-      _setReplayCaptureOptions({fileName: '', pastDuration : 30});
+      _setReplayCaptureOptions({ fileName: "", pastDuration: 30 });
 
       const replayOptions = settings.replaysOptions;
       if (!replayOptions) {
@@ -126,7 +125,7 @@ const AppContextProvider: FC<Props> = ({ children }): JSX.Element => {
 
   // ---------------------------------------------------------------------------
   const handleLogMessage = (...args) => {
-    let item = '';
+    let item = "";
     args.forEach((arg) => {
       item = `${item}-${JSON.stringify(arg)}`;
     });

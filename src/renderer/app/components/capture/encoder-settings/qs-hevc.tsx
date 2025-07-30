@@ -1,7 +1,7 @@
-import React, { ChangeEvent, FC, useContext } from 'react';
-import AppContext from '../../../context/app-context';
-import { kQuickSyncTargetUsageArray } from '../constants';
-import { EncoderSettingsQuickSyncHEVC } from '@overwolf/ow-electron-packages-types';
+import React, { ChangeEvent, FC, useContext } from "react";
+import AppContext from "../../../context/app-context";
+import { kQuickSyncTargetUsageArray } from "../constants";
+import { EncoderSettingsQuickSyncHEVC } from "@overwolf/ow-electron-packages-types";
 
 const QsHevcEncoderSettings: FC = () => {
   const { captureSettings, setCaptureSettings } =
@@ -18,7 +18,7 @@ const QsHevcEncoderSettings: FC = () => {
 
     setCaptureSettings({ ...captureSettings, videoEncoderSettings });
   };
-  let supported_Encoders = ['obs_qsv11_hevc', 'obs_qsv11_v2'];
+  let supported_Encoders = ["obs_qsv11_hevc", "obs_qsv11_v2"];
 
   if (
     !supported_Encoders.includes(captureSettings?.videoEncoderSettings?.type)
@@ -36,7 +36,7 @@ const QsHevcEncoderSettings: FC = () => {
         bframes:
         <input
           type="text"
-          value={vidEncSettings?.bframes ?? ''}
+          value={vidEncSettings?.bframes ?? ""}
           name="bframes"
           onChange={onVideoEncoderSettingChanged}
         />
@@ -55,11 +55,11 @@ const QsHevcEncoderSettings: FC = () => {
       <label htmlFor="video-encoder-profile">Profile: </label>
       <select
         id="video-encoder-profile"
-        value={vidEncSettings?.profile || ''}
+        value={vidEncSettings?.profile || ""}
         onChange={onVideoEncoderSettingChanged}
         name="profile"
       >
-        {['main']?.map((profile) => (
+        {["main"]?.map((profile) => (
           <option key={profile} label={profile} value={profile} />
         ))}
       </select>
@@ -67,7 +67,7 @@ const QsHevcEncoderSettings: FC = () => {
       <label htmlFor="video-encoder-target-usage">Target Usage: </label>
       <select
         id="video-encoder-target-usage"
-        value={vidEncSettings?.target_usage ?? ''}
+        value={vidEncSettings?.target_usage ?? ""}
         onChange={onVideoEncoderSettingChanged}
         name="target_usage"
       >

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 
 // -----------------------------------------------------------------------------
 const AdView: FC = () => {
@@ -7,10 +7,10 @@ const AdView: FC = () => {
       <h2>Ad View:</h2>
       <div
         style={{
-          width: '400px',
-          height: '300px',
-          border: '1px solid',
-          background: 'transparent',
+          width: "400px",
+          height: "300px",
+          border: "1px solid",
+          background: "transparent",
         }}
       >
         <owadview slotsize="400x300" cid="mainAd" />

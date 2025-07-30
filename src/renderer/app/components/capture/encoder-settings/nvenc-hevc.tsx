@@ -1,11 +1,11 @@
-import React, { ChangeEvent, FC, useContext } from 'react';
-import AppContext from '../../../context/app-context';
+import React, { ChangeEvent, FC, useContext } from "react";
+import AppContext from "../../../context/app-context";
 import {
   kNVENCEncoderRateControlArray,
   kNVENCEncoderTuningArray,
   kNVENCEncoderMultipassArray,
-} from '../constants';
-import { EncoderSettingsNVENCHEVC } from '@overwolf/ow-electron-packages-types';
+} from "../constants";
+import { EncoderSettingsNVENCHEVC } from "@overwolf/ow-electron-packages-types";
 
 const NVENCHEVCEncoderSettings: FC = () => {
   const { captureSettings, setCaptureSettings } =
@@ -23,7 +23,7 @@ const NVENCHEVCEncoderSettings: FC = () => {
     setCaptureSettings({ ...captureSettings, videoEncoderSettings });
   };
 
-  if (captureSettings?.videoEncoderSettings?.type !== 'obs_nvenc_hevc_tex') {
+  if (captureSettings?.videoEncoderSettings?.type !== "obs_nvenc_hevc_tex") {
     return <></>;
   }
 
@@ -57,11 +57,11 @@ const NVENCHEVCEncoderSettings: FC = () => {
       <label htmlFor="video-encoder-preset">preset: </label>
       <select
         id="video-encoder-preset"
-        value={vidEncSettings?.preset2 || ''}
+        value={vidEncSettings?.preset || ""}
         onChange={onVideoEncoderSettingChanged}
         name="preset2"
       >
-        {['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7']?.map((preset) => (
+        {["p1", "p2", "p3", "p4", "p5", "p6", "p7"]?.map((preset) => (
           <option key={preset} label={preset} value={preset} />
         ))}
       </select>
@@ -69,7 +69,7 @@ const NVENCHEVCEncoderSettings: FC = () => {
       <label htmlFor="video-encoder-rate_control">Rate Control: </label>
       <select
         id="video-encoder-rate_control"
-        value={vidEncSettings?.rate_control || ''}
+        value={vidEncSettings?.rate_control || ""}
         onChange={onVideoEncoderSettingChanged}
         name="rate_control"
       >
@@ -81,11 +81,11 @@ const NVENCHEVCEncoderSettings: FC = () => {
       <label htmlFor="video-encoder-profile">Profile: </label>
       <select
         id="video-encoder-profile"
-        value={vidEncSettings?.profile || 'main'}
+        value={vidEncSettings?.profile || "main"}
         onChange={onVideoEncoderSettingChanged}
         name="profile"
       >
-        {['main', 'main10']?.map((profile) => (
+        {["main", "main10"]?.map((profile) => (
           <option key={profile} label={profile} value={profile} />
         ))}
       </select>
@@ -93,7 +93,7 @@ const NVENCHEVCEncoderSettings: FC = () => {
       <label htmlFor="video-encoder-tune">Tune: </label>
       <select
         id="video-encoder-tune"
-        value={vidEncSettings?.profile || 'main'}
+        value={vidEncSettings?.profile || "main"}
         onChange={onVideoEncoderSettingChanged}
         name="tune"
       >
@@ -105,7 +105,7 @@ const NVENCHEVCEncoderSettings: FC = () => {
       <label htmlFor="video-encoder-multipass">Multipass: </label>
       <select
         id="video-encoder-multipass"
-        value={vidEncSettings?.multipass || 'disabled'}
+        value={vidEncSettings?.multipass || "disabled"}
         onChange={onVideoEncoderSettingChanged}
         name="multipass"
       >

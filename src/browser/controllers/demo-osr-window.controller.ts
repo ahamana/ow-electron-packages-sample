@@ -1,6 +1,11 @@
 import path from "path";
 import { OverlayService } from "../services/overlay.service";
-import { OverlayBrowserWindow, OverlayWindowOptions, PassthroughType, ZOrderType } from "@overwolf/ow-electron-packages-types";
+import {
+  OverlayBrowserWindow,
+  OverlayWindowOptions,
+  PassthroughType,
+  ZOrderType,
+} from "@overwolf/ow-electron-packages-types";
 
 /**
  *
@@ -8,19 +13,17 @@ import { OverlayBrowserWindow, OverlayWindowOptions, PassthroughType, ZOrderType
 export class DemoOSRWindowController {
   private overlayWindow: OverlayBrowserWindow = null;
 
-
   /**
    *
    */
-  public get overlayBrowserWindow() : OverlayBrowserWindow {
+  public get overlayBrowserWindow(): OverlayBrowserWindow {
     return this.overlayWindow;
   }
 
   /**
    *
    */
-  constructor(private readonly overlayService: OverlayService) {
-  }
+  constructor(private readonly overlayService: OverlayService) {}
   /**
 
    *
@@ -28,7 +31,7 @@ export class DemoOSRWindowController {
   public async createAndShow(showDevTools: boolean) {
     // name should be unique
     const options: OverlayWindowOptions = {
-      name: 'osrWindow-' + Math.floor(Math.random() * 1000),
+      name: "osrWindow-" + Math.floor(Math.random() * 1000),
       height: 700,
       width: 500,
       show: true,
@@ -49,16 +52,14 @@ export class DemoOSRWindowController {
     options.x = this.randomInteger(0, screenWidth - options.width);
     options.y = 10;
 
-    this.overlayWindow = await this.overlayService.createNewOsrWindow(
-      options,
-    );
+    this.overlayWindow = await this.overlayService.createNewOsrWindow(options);
 
     this.registerToIpc();
 
     this.registerToWindowEvents();
 
     await this.overlayWindow.window.loadURL(
-      path.join(__dirname, '../renderer/osr/osr.html')
+      path.join(__dirname, "../renderer/osr/osr.html")
     );
 
     this.overlayWindow.window.show();
@@ -70,41 +71,41 @@ export class DemoOSRWindowController {
   private registerToIpc() {
     const windowIpc = this.overlayWindow.window.webContents.ipc;
 
-    windowIpc.on('resizeOsrClick', (e) => {
+    windowIpc.on("resizeOsrClick", (e) => {
       this.handleResizeCommand();
     });
 
-    windowIpc.on('moveOsrClick', (e) => {
+    windowIpc.on("moveOsrClick", (e) => {
       this.handleMoveCommand();
     });
 
-    windowIpc.on('minimizeOsrClick', (e) => {
+    windowIpc.on("minimizeOsrClick", (e) => {
       const window = this.overlayWindow.window;
       window?.minimize();
     });
 
-    windowIpc.on('setPassthrough', (e, value) => {
+    windowIpc.on("setPassthrough", (e, value) => {
       this.setWindowPassthrough(value);
     });
 
-    windowIpc.on('setZorder', (e, value) => {
+    windowIpc.on("setZorder", (e, value) => {
       this.setWindowZorder(value);
     });
 
-    windowIpc.on('devtools', () => {
-      this.overlayWindow.window.webContents.openDevTools({ mode: 'detach' });
+    windowIpc.on("devtools", () => {
+      this.overlayWindow.window.webContents.openDevTools({ mode: "detach" });
     });
   }
 
   /**
    *
-  */
+   */
   private registerToWindowEvents() {
     const browserWindow = this.overlayWindow.window;
-    browserWindow.on('closed', () =>{
+    browserWindow.on("closed", () => {
       this.overlayWindow = null;
-      console.log('osr window closed');
-    })
+      console.log("osr window closed");
+    });
   }
 
   /**

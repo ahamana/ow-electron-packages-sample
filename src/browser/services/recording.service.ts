@@ -1,5 +1,5 @@
-import { app as electronApp, ipcMain } from 'electron';
-import { overwolf } from '@overwolf/ow-electron';
+import { app as electronApp, ipcMain } from "electron";
+import { overwolf } from "@overwolf/ow-electron";
 import {
   ActiveReplay,
   IOverwolfRecordingApi,
@@ -17,19 +17,19 @@ import {
   RecorderStats,
   AudioDeviceSettingsInfo,
   CaptureSettingsBuilder,
-} from '@overwolf/ow-electron-packages-types';
-import EventEmitter from 'events';
-import path from 'path';
+} from "@overwolf/ow-electron-packages-types";
+import EventEmitter from "events";
+import path from "path";
 import {
   IRecorderIPCService,
   RecorderIPCService,
-} from '../ipc/recorder-service-ipc';
-import { IRecorderInformation } from '../../common/recorder/recorder-information';
+} from "../ipc/recorder-service-ipc";
+import { IRecorderInformation } from "../../common/recorder/recorder-information";
 
 const app = electronApp as overwolf.OverwolfApp;
 const owElectronPackages = app.overwolf.packages as OWPackages;
 
-const kDefaultOutputPath = path.join(app.getPath('videos'), app.name);
+const kDefaultOutputPath = path.join(app.getPath("videos"), app.name);
 
 const kReplayBufferSeconds = 60;
 
@@ -70,7 +70,7 @@ export class RecordingService extends EventEmitter {
   private outPutFolder: string = kDefaultOutputPath;
 
   private readonly ipcHandler: IRecorderIPCService = new RecorderIPCService(
-    this,
+    this
   );
 
   // ---------------------------------------------------------------------------
@@ -112,12 +112,12 @@ export class RecordingService extends EventEmitter {
       }
 
       await this.recorderApi?.stopRecording((stopResult) => {
-        this.emit('log', 'Recording stopped ', stopResult);
-        this.emit('recorder-status-changed', 'stopped');
+        this.emit("log", "Recording stopped ", stopResult);
+        this.emit("recorder-status-changed", "stopped");
       });
     } catch (err) {
-      this.emit('log', 'recorder-stop-error', err);
-      console.error('STOP ERROR', err);
+      this.emit("log", "recorder-stop-error", err);
+      console.error("STOP ERROR", err);
       return;
     }
   }
@@ -125,21 +125,21 @@ export class RecordingService extends EventEmitter {
   // ---------------------------------------------------------------------------
   public async startCaptureReplay() {
     try {
-      const fileName = this.generateFileNameFormat('replay-capture');
+      const fileName = this.generateFileNameFormat("replay-capture");
 
       this.replayCaptureOptions.fileName = fileName;
       this.activeReplay = await this.recorderApi?.captureReplay(
         this.replayCaptureOptions,
         (video) => {
-          this.emit('log', '**** replay video ready ', video);
-          this.emit('recorder-status-changed', 'replay');
+          this.emit("log", "**** replay video ready ", video);
+          this.emit("recorder-status-changed", "replay");
           this.activeReplay = undefined;
-        },
+        }
       );
-      this.emit('recorder-status-changed', 'replay-capture');
-      this.emit('log', 'Start Capture Replay');
+      this.emit("recorder-status-changed", "replay-capture");
+      this.emit("log", "Start Capture Replay");
     } catch (error) {
-      this.emit('log', 'Error starting capture replay', error.message);
+      this.emit("log", "Error starting capture replay", error.message);
     }
   }
 
@@ -152,17 +152,17 @@ export class RecordingService extends EventEmitter {
 
       this.activeReplay?.stopAfter(10000);
     } catch (error) {
-      this.emit('log', 'Error starting capture replay', error.message);
+      this.emit("log", "Error starting capture replay", error.message);
     }
   }
 
   // ---------------------------------------------------------------------------
   public async stopCaptureReplay() {
     try {
-      this.emit('log', 'Stop Capture Replay');
+      this.emit("log", "Stop Capture Replay");
       this.activeReplay?.stop();
     } catch (error) {
-      this.emit('log', 'Error stopping capture replay', error);
+      this.emit("log", "Error stopping capture replay", error);
     }
   }
 
@@ -175,7 +175,7 @@ export class RecordingService extends EventEmitter {
         await this.startReplaysAdvanced();
       }
     } catch (err) {
-      this.emit('log', 'START replay ERROR', err);
+      this.emit("log", "START replay ERROR", err);
       return;
     }
   }
@@ -183,11 +183,11 @@ export class RecordingService extends EventEmitter {
   // ---------------------------------------------------------------------------
   public async stopReplays() {
     try {
-      this.emit('log', 'Stop replays');
-      this.emit('recorder-status-changed', 'stopped');
+      this.emit("log", "Stop replays");
+      this.emit("recorder-status-changed", "stopped");
       await this.recorderApi?.stopReplays();
     } catch (err) {
-      this.emit('log', 'Stop replay ew', err);
+      this.emit("log", "Stop replay ew", err);
       return;
     }
   }
@@ -223,7 +223,7 @@ export class RecordingService extends EventEmitter {
         captureSettingsOptions: this.captureSettingsOptions,
       };
     } catch (error) {
-      this.emit('log', 'Error obtaining query Information', error);
+      this.emit("log", "Error obtaining query Information", error);
     }
   }
 
@@ -232,7 +232,7 @@ export class RecordingService extends EventEmitter {
     try {
       return this.recorderApi?.isActive();
     } catch (error) {
-      this.emit('log', 'Error While checking Recorder status', error);
+      this.emit("log", "Error While checking Recorder status", error);
     }
   }
 
@@ -240,10 +240,10 @@ export class RecordingService extends EventEmitter {
   public async splitCapture() {
     try {
       return this.recorderApi?.splitRecording((split) => {
-        this.emit('log', 'recording split result (callback) ', split);
+        this.emit("log", "recording split result (callback) ", split);
       });
     } catch (error) {
-      this.emit('log', 'Error Splitting capture ', error);
+      this.emit("log", "Error Splitting capture ", error);
     }
   }
 
@@ -258,14 +258,14 @@ export class RecordingService extends EventEmitter {
         this.recorderApi.options[prop] = options[prop];
       }
     } catch (error) {
-      this.emit('log', 'Error setting app options', error);
+      this.emit("log", "Error setting app options", error);
     }
   }
 
   // ---------------------------------------------------------------------------
   public async setAudioDevices(devices: AudioDeviceSettingsInfo[]) {
-    const input = devices.filter((d) => d.type === 'input');
-    const output = devices.filter((d) => d.type === 'output');
+    const input = devices.filter((d) => d.type === "input");
+    const output = devices.filter((d) => d.type === "output");
     try {
       if (!this.captureSettings) {
         this.captureSettings = (
@@ -275,9 +275,9 @@ export class RecordingService extends EventEmitter {
 
       this.captureSettings.audioSettings.inputs = input;
       this.captureSettings.audioSettings.outputs = output;
-      this.emit('capture-settings-changed');
+      this.emit("capture-settings-changed");
     } catch (error) {
-      this.emit('log', 'Error while setting Audio Device', error.message);
+      this.emit("log", "Error while setting Audio Device", error.message);
     }
   }
 
@@ -291,10 +291,10 @@ export class RecordingService extends EventEmitter {
   // wait for package 'ready' event
   private async awaitReady() {
     return new Promise<void>((resolve) => {
-      owElectronPackages.on('ready', async (e, packageName) => {
+      owElectronPackages.on("ready", async (e, packageName) => {
         // @ts-ignore
         // will be fix in the next ow-electron.d.ts version
-        if (packageName !== 'recorder') {
+        if (packageName !== "recorder") {
           return;
         }
 
@@ -310,7 +310,7 @@ export class RecordingService extends EventEmitter {
   }
 
   private async createCaptureOptions(
-    options: CaptureSettingsOptions,
+    options: CaptureSettingsOptions
   ): Promise<CaptureSettingsBuilder> {
     try {
       return this.recorderApi?.createSettingsBuilder(options);
@@ -321,7 +321,7 @@ export class RecordingService extends EventEmitter {
     this.recordingOptions = {
       autoShutdownOnGameExit: true,
       // will be replace we we start the actual recording
-      filePath: path.join(this.outPutFolder, 'dummy'),
+      filePath: path.join(this.outPutFolder, "dummy"),
     };
 
     this.replaysOptions = {
@@ -332,7 +332,7 @@ export class RecordingService extends EventEmitter {
 
     this.replayCaptureOptions = {
       pastDuration: 30,
-      fileName: this.generateFileNameFormat('replay-capture'),
+      fileName: this.generateFileNameFormat("replay-capture"),
     };
 
     this.captureSettingsOptions = {
@@ -344,31 +344,31 @@ export class RecordingService extends EventEmitter {
   // ---------------------------------------------------------------------------
   private registerRecorderListeners() {
     try {
-      this.recorderApi?.on('game-launched', this.onGameLaunched.bind(this));
-      this.recorderApi?.on('recording-split', this.onRecordingSplit.bind(this));
-      this.recorderApi?.on('replay-captured', this.onReplayReady.bind(this));
-      this.recorderApi?.on('replays-stopped', this.onReplaysStop.bind(this));
-      this.recorderApi?.on('replays-started', this.onReplaysStart.bind(this));
-      this.recorderApi?.on('game-exit', this.onGameExit.bind(this));
-      this.recorderApi?.on('stats', this.onRecordingStats.bind(this));
+      this.recorderApi?.on("game-launched", this.onGameLaunched.bind(this));
+      this.recorderApi?.on("recording-split", this.onRecordingSplit.bind(this));
+      this.recorderApi?.on("replay-captured", this.onReplayReady.bind(this));
+      this.recorderApi?.on("replays-stopped", this.onReplaysStop.bind(this));
+      this.recorderApi?.on("replays-started", this.onReplaysStart.bind(this));
+      this.recorderApi?.on("game-exit", this.onGameExit.bind(this));
+      this.recorderApi?.on("stats", this.onRecordingStats.bind(this));
     } catch (error) {
-      this.emit('log', 'Error while registering listeners', error);
+      this.emit("log", "Error while registering listeners", error);
     }
   }
 
   // ---------------------------------------------------------------------------
   private removeRecorderListeners() {
     let recorder = this.recorderApi as unknown as EventEmitter;
-    recorder?.removeListener('game-exit', this.onGameExit.bind(this));
-    recorder?.removeListener('game-launched', this.onGameLaunched.bind(this));
+    recorder?.removeListener("game-exit", this.onGameExit.bind(this));
+    recorder?.removeListener("game-launched", this.onGameLaunched.bind(this));
     recorder?.removeListener(
-      'recording-split',
-      this.onRecordingSplit.bind(this),
+      "recording-split",
+      this.onRecordingSplit.bind(this)
     );
-    recorder?.removeListener('replay-ready', this.onReplayReady.bind(this));
-    recorder?.removeListener('replays-stop', this.onReplaysStop.bind(this));
-    recorder?.removeListener('replays-start', this.onReplaysStart.bind(this));
-    recorder?.removeListener('game-exit', this.onRecordingStats.bind(this));
+    recorder?.removeListener("replay-ready", this.onReplayReady.bind(this));
+    recorder?.removeListener("replays-stop", this.onReplaysStop.bind(this));
+    recorder?.removeListener("replays-start", this.onReplaysStart.bind(this));
+    recorder?.removeListener("game-exit", this.onRecordingStats.bind(this));
   }
 
   // ---------------------------------------------------------------------------
@@ -379,7 +379,7 @@ export class RecordingService extends EventEmitter {
         all: true,
       });
     } catch (error) {
-      this.emit('log', 'Error while registering games', error);
+      this.emit("log", "Error while registering games", error);
     }
   }
   i;
@@ -429,7 +429,7 @@ export class RecordingService extends EventEmitter {
       */
 
       /* ********************************************* */
-      const fileName = this.generateFileNameFormat(gameInfo?.name ?? 'desktop');
+      const fileName = this.generateFileNameFormat(gameInfo?.name ?? "desktop");
       await this.recorderApi?.startRecording(
         {
           filePath: path.join(this.outPutFolder, fileName),
@@ -438,13 +438,13 @@ export class RecordingService extends EventEmitter {
         },
         settings.build(),
         (stopResult) => {
-          this.emit('log', 'Recording stopped ', stopResult);
-        },
+          this.emit("log", "Recording stopped ", stopResult);
+        }
       );
 
-      this.emit('log', 'Recording Started');
+      this.emit("log", "Recording Started");
 
-      this.emit('recorder-status-changed', 'recording');
+      this.emit("recorder-status-changed", "recording");
 
       // we can also start the replays
       /*
@@ -455,7 +455,7 @@ export class RecordingService extends EventEmitter {
       */
     } catch (err) {
       // if (error instanceof RecorderError) {... }
-      this.emit('start simple recording error', 'recording', err.message);
+      this.emit("start simple recording error", "recording", err.message);
     }
   }
 
@@ -487,7 +487,7 @@ export class RecordingService extends EventEmitter {
       }
 
       const fileName = this.generateFileNameFormat(
-        game ? game.name : 'desktop',
+        game ? game.name : "desktop"
       );
 
       this.recordingOptions.filePath = path.join(this.outPutFolder, fileName);
@@ -496,14 +496,14 @@ export class RecordingService extends EventEmitter {
         this.recordingOptions,
         settingsBuilder,
         (stopResult) => {
-          this.emit('log', 'Recording stopped ', stopResult);
-        },
+          this.emit("log", "Recording stopped ", stopResult);
+        }
       );
-      this.emit('recorder-status-changed', 'recording');
-      this.emit('log', 'Recording started');
+      this.emit("recorder-status-changed", "recording");
+      this.emit("log", "Recording started");
     } catch (err) {
-      this.emit('log', 'recorder-start-error', err);
-      console.error('START ERROR', err);
+      this.emit("log", "recorder-start-error", err);
+      console.error("START ERROR", err);
     }
   }
 
@@ -517,16 +517,16 @@ export class RecordingService extends EventEmitter {
       });
 
       settings.videoSettings.fps = 30;
-      this.emit('log', 'Start replays');
-      this.replaysOptions.rootFolder = path.join(kDefaultOutputPath, 'replays');
+      this.emit("log", "Start replays");
+      this.replaysOptions.rootFolder = path.join(kDefaultOutputPath, "replays");
       await this.recorderApi?.startReplays(
         this.replaysOptions,
-        settings.build(),
+        settings.build()
       );
 
-      this.emit('recorder-status-changed', 'replay');
+      this.emit("recorder-status-changed", "replay");
     } catch (err) {
-      this.emit('log', 'START replay ERROR', err);
+      this.emit("log", "START replay ERROR", err);
       return;
     }
   }
@@ -534,15 +534,15 @@ export class RecordingService extends EventEmitter {
   // ---------------------------------------------------------------------------
   private async startReplaysAdvanced() {
     try {
-      this.emit('log', 'Start replays');
-      this.replaysOptions.rootFolder = path.join(kDefaultOutputPath, 'replays');
+      this.emit("log", "Start replays");
+      this.replaysOptions.rootFolder = path.join(kDefaultOutputPath, "replays");
       await this.recorderApi?.startReplays(
         this.replaysOptions,
-        this.captureSettings,
+        this.captureSettings
       );
-      this.emit('recorder-status-changed', 'replay');
+      this.emit("recorder-status-changed", "replay");
     } catch (err) {
-      this.emit('log', 'START replay ERROR', err);
+      this.emit("log", "START replay ERROR", err);
       return;
     }
   }
@@ -551,13 +551,13 @@ export class RecordingService extends EventEmitter {
   private generateFileNameFormat(prefix?: string, suffix?: string) {
     const now = new Date();
     const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
     const timestamp = `${year}-${month}-${day}-${hours}-${minutes}-${seconds}`;
-    let fileName = '';
+    let fileName = "";
     if (prefix) {
       fileName = `${prefix}-`;
     }
@@ -583,7 +583,7 @@ export class RecordingService extends EventEmitter {
 
     const alreadyActive = await this.recorderApi.isActive();
     if (alreadyActive) {
-      this.emit('log', `Recording 'game-launch' already active `, gameInfo);
+      this.emit("log", `Recording 'game-launch' already active `, gameInfo);
       return;
     }
 
@@ -612,14 +612,14 @@ export class RecordingService extends EventEmitter {
 
   // ---------------------------------------------------------------------------
   private async onGameExit(gameInfo) {
-    this.emit('log', 'Recording game-exit ', JSON.stringify(gameInfo));
-    this.emit('recorder-status-changed', 'stopped');
+    this.emit("log", "Recording game-exit ", JSON.stringify(gameInfo));
+    this.emit("recorder-status-changed", "stopped");
     this.stopRecording();
   }
 
   // ---------------------------------------------------------------------------
   private async onRecordingStats(statsInfo: RecorderStats) {
-    this.emit('stats', statsInfo);
+    this.emit("stats", statsInfo);
   }
 
   // ---------------------------------------------------------------------------
@@ -628,4 +628,3 @@ export class RecordingService extends EventEmitter {
     return owElectronPackages.recorder;
   }
 }
-

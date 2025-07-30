@@ -1,4 +1,10 @@
-import { CaptureSettings, CaptureSettingsOptions, RecordingInformation, RecordingOptions, ReplayOptions } from "@overwolf/ow-electron-packages-types";
+import {
+  CaptureSettings,
+  CaptureSettingsOptions,
+  RecordingInformation,
+  RecordingOptions,
+  ReplayOptions,
+} from "@overwolf/ow-electron-packages-types";
 
 // common capture settings
 export interface IRecorderInformation {

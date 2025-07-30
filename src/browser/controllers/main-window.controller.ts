@@ -1,18 +1,16 @@
-import { app as electronApp, ipcMain, BrowserWindow, dialog } from 'electron';
-import { GameEventsService } from '../services/gep.service';
-import path from 'path';
-import { DemoOSRWindowController } from './demo-osr-window.controller';
-import { OverlayService } from '../services/overlay.service';
-import { overwolf } from '@overwolf/ow-electron';
-import { OverlayHotkeysService } from '../services/overlay-hotkeys.service';
-import { OverlayInputService } from '../services/overlay-input.service';
-import {
-  RecordingService,
-} from '../services/recording.service';
-import { RecordingStatus } from '../../common/recorder/recording-status';
-import { GameInfo, RecorderStats } from '@overwolf/ow-electron-packages-types';
-import { exec } from 'child_process';
-import { LolGameListener } from './lol-events-listener';
+import { app as electronApp, ipcMain, BrowserWindow, dialog } from "electron";
+import { GameEventsService } from "../services/gep.service";
+import path from "path";
+import { DemoOSRWindowController } from "./demo-osr-window.controller";
+import { OverlayService } from "../services/overlay.service";
+import { overwolf } from "@overwolf/ow-electron";
+import { OverlayHotkeysService } from "../services/overlay-hotkeys.service";
+import { OverlayInputService } from "../services/overlay-input.service";
+import { RecordingService } from "../services/recording.service";
+import { RecordingStatus } from "../../common/recorder/recording-status";
+import { GameInfo, RecorderStats } from "@overwolf/ow-electron-packages-types";
+import { exec } from "child_process";
+import { LolGameListener } from "./lol-events-listener";
 
 const owElectronApp = electronApp as overwolf.OverwolfApp;
 
@@ -32,7 +30,7 @@ export class MainWindowController {
     private readonly overlayHotkeysService: OverlayHotkeysService,
     private readonly overlayInputService: OverlayInputService,
     private readonly recordingService: RecordingService,
-    private readonly lolListener: LolGameListener,
+    private readonly lolListener: LolGameListener
   ) {
     this.registerToIpc();
     this.registerListeners();
@@ -46,7 +44,7 @@ export class MainWindowController {
       return;
     }
 
-    this.browserWindow?.webContents?.send('console-message', message, ...args);
+    this.browserWindow?.webContents?.send("console-message", message, ...args);
   }
 
   private gepOnInfo(message: string, ...args: any[]) {
@@ -66,7 +64,7 @@ export class MainWindowController {
   }
 
   private onRecorderStatusChanged(status: RecordingStatus) {
-    this.browserWindow?.webContents?.send('recording-status-changed', status);
+    this.browserWindow?.webContents?.send("recording-status-changed", status);
   }
 
   private onCaptureSettingsChanged() {
@@ -75,8 +73,8 @@ export class MainWindowController {
     }
 
     this.browserWindow?.webContents?.send(
-      'capture-settings-changed',
-      this.recordingService?.captureSettings,
+      "capture-settings-changed",
+      this.recordingService?.captureSettings
     );
   }
 
@@ -85,7 +83,7 @@ export class MainWindowController {
       return;
     }
 
-    this.browserWindow?.webContents?.send('recording-stats', statsInfo);
+    this.browserWindow?.webContents?.send("recording-stats", statsInfo);
   }
 
   /**
@@ -104,26 +102,26 @@ export class MainWindowController {
         contextIsolation: true,
         devTools: showDevTools,
         // relative to root folder of the project
-        preload: path.join(__dirname, '../preload/preload.js'),
+        preload: path.join(__dirname, "../preload/preload.js"),
       },
     });
 
-    this.browserWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
+    this.browserWindow.loadFile(path.join(__dirname, "../renderer/index.html"));
   }
 
   /**
    *
    */
   private async registerToIpc() {
-    ipcMain.handle('createOSR', async () => await this.createOSRDemoWindow());
+    ipcMain.handle("createOSR", async () => await this.createOSRDemoWindow());
 
-    ipcMain.handle('open-folder-picker', async () => {
+    ipcMain.handle("open-folder-picker", async () => {
       return dialog.showOpenDialog({
-        properties: ['openDirectory'],
+        properties: ["openDirectory"],
       });
     });
 
-    ipcMain.handle('open-folder', (...args) => {
+    ipcMain.handle("open-folder", (...args) => {
       try {
         if (!args[1]) {
           return false;
@@ -148,32 +146,32 @@ export class MainWindowController {
   }
 
   private registerListeners() {
-    this.gepService.on('log', this.printLogMessage.bind(this));
-    this.gepService.on('gep-info', this.gepOnInfo.bind(this));
-    this.gepService.on('gep-event', this.gepOnEvent.bind(this));
-    this.gepService.on('game-launch', this.gepOnLaunch.bind(this));
-    this.overlayService.on('log', this.printLogMessage.bind(this));
-    this.overlayService.on('game-exit', this.gepOnExit.bind(this));
-    this.overlayHotkeysService.on('log', this.printLogMessage.bind(this));
-    this.recordingService.on('log', this.printLogMessage.bind(this));
-    this.recordingService.on('stats', this.onRecordingStats.bind(this));
+    this.gepService.on("log", this.printLogMessage.bind(this));
+    this.gepService.on("gep-info", this.gepOnInfo.bind(this));
+    this.gepService.on("gep-event", this.gepOnEvent.bind(this));
+    this.gepService.on("game-launch", this.gepOnLaunch.bind(this));
+    this.overlayService.on("log", this.printLogMessage.bind(this));
+    this.overlayService.on("game-exit", this.gepOnExit.bind(this));
+    this.overlayHotkeysService.on("log", this.printLogMessage.bind(this));
+    this.recordingService.on("log", this.printLogMessage.bind(this));
+    this.recordingService.on("stats", this.onRecordingStats.bind(this));
     this.recordingService.on(
-      'capture-settings-changed',
-      this.onCaptureSettingsChanged.bind(this),
+      "capture-settings-changed",
+      this.onCaptureSettingsChanged.bind(this)
     );
 
     this.recordingService.on(
-      'recorder-status-changed',
-      this.onRecorderStatusChanged.bind(this),
+      "recorder-status-changed",
+      this.onRecorderStatusChanged.bind(this)
     );
 
-    owElectronApp.overwolf.packages.on('crashed', (e, ...args) => {
-      this.printLogMessage('package crashed', ...args);
+    owElectronApp.overwolf.packages.on("crashed", (e, ...args) => {
+      this.printLogMessage("package crashed", ...args);
     });
 
     owElectronApp.overwolf.packages.on(
-      'failed-to-initialize',
-      this.logPackageManagerErrors.bind(this),
+      "failed-to-initialize",
+      this.logPackageManagerErrors.bind(this)
     );
   }
 
@@ -182,9 +180,9 @@ export class MainWindowController {
    */
   private logPackageManagerErrors(e, packageName, ...args: any[]) {
     this.printLogMessage(
-      'Overwolf Package Manager error!',
+      "Overwolf Package Manager error!",
       packageName,
-      ...args,
+      ...args
     );
   }
 
@@ -197,9 +195,8 @@ export class MainWindowController {
     const showDevTools = true;
     await controller.createAndShow(showDevTools);
 
-    controller.overlayBrowserWindow.window.on('closed', () => {
-      this.printLogMessage('osr window closed');
+    controller.overlayBrowserWindow.window.on("closed", () => {
+      this.printLogMessage("osr window closed");
     });
   }
 }
-

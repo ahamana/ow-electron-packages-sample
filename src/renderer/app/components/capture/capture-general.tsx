@@ -1,6 +1,6 @@
-import React, { ChangeEvent, FC, useContext, useState } from 'react';
-import AppContext from '../../context/app-context';
-import { RecordingActions } from '../../api-actions/recording-actions';
+import React, { ChangeEvent, FC, useContext, useState } from "react";
+import AppContext from "../../context/app-context";
+import { RecordingActions } from "../../api-actions/recording-actions";
 
 // -----------------------------------------------------------------------------
 const CaptureGeneral: FC = () => {

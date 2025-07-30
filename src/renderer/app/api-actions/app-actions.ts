@@ -8,7 +8,7 @@ export class AppActions {
   };
 
   static openFolderPicker = async () => {
-    const {filePaths} = await window.app.openFolderPicker();
+    const { filePaths } = await window.app.openFolderPicker();
     return filePaths[0];
   };
 

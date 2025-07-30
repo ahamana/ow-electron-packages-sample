@@ -1,0 +1,4 @@
+onlyBuiltDependencies:
+  - '@overwolf/ow-electron'
+  - electron
+  - electron-winstaller

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from 'react';
+import React, { ChangeEvent, FC } from "react";
 
 interface InputSwitchProps {
   title: string;
@@ -18,21 +18,21 @@ const InputSwitch: FC<InputSwitchProps> = ({
 }) => {
   const checkedSliderBeforeStyle = {
     ...styles.sliderBeforeStyle,
-    transform: value ? 'translateX(26px)' : 'translateX(0)',
-    display: 'flex',
+    transform: value ? "translateX(26px)" : "translateX(0)",
+    display: "flex",
   };
 
   const checkedSliderStyle = {
     ...styles.sliderStyle,
-    backgroundColor: value ? '#2196F3' : '#ccc',
-    display: 'flex',
+    backgroundColor: value ? "#2196F3" : "#ccc",
+    display: "flex",
   };
 
   return (
     <div>
       <span> {title} </span>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <span style={{ marginLeft: '10px' }}>{offText}</span>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <span style={{ marginLeft: "10px" }}>{offText}</span>
         <label style={styles.switchStyle}>
           <input
             style={styles.inputStyle}
@@ -53,12 +53,12 @@ const InputSwitch: FC<InputSwitchProps> = ({
 
 const styles = {
   switchStyle: {
-    position: 'relative' as 'relative',
-    display: 'flex',
-    width: '60px',
-    height: '34px',
-    marginLeft: '15px',
-    marginRight: '15px',
+    position: "relative" as "relative",
+    display: "flex",
+    width: "60px",
+    height: "34px",
+    marginLeft: "15px",
+    marginRight: "15px",
   },
   inputStyle: {
     opacity: 0,
@@ -66,26 +66,26 @@ const styles = {
     height: 0,
   },
   sliderBeforeStyle: {
-    position: 'absolute' as 'absolute',
+    position: "absolute" as "absolute",
     content: '""',
-    height: '26px',
-    width: '26px',
-    left: '4px',
-    bottom: '4px',
-    backgroundColor: 'white',
-    transition: '.4s',
-    borderRadius: '50%',
+    height: "26px",
+    width: "26px",
+    left: "4px",
+    bottom: "4px",
+    backgroundColor: "white",
+    transition: ".4s",
+    borderRadius: "50%",
   },
   sliderStyle: {
-    position: 'absolute' as 'absolute',
-    cursor: 'pointer' as 'pointer',
+    position: "absolute" as "absolute",
+    cursor: "pointer" as "pointer",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: '#ccc',
-    transition: '.4s',
-    borderRadius: '34px',
+    backgroundColor: "#ccc",
+    transition: ".4s",
+    borderRadius: "34px",
   },
 };
 

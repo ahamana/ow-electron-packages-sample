@@ -10,7 +10,7 @@ To set up this app, you must first install its dependencies (using [yarn](https:
 
 From there, you can easily run/interact with it.
 
-## Quick start 
+## Quick start
 
 To run the app in development mode, simply run the `build` script, followed by the `start` script from the package.json.  
 For example:
@@ -63,6 +63,7 @@ In order to add more/remove certain ow-electron "packages" from the project, sim
 ```
 
 ### Available packages detailed information
-* [Recorder](https://github.com/overwolf/ow-electron-packages-types/blob/beta/docs/recorder/recorder.md)
-* [Game Events Provider](https://github.com/overwolf/ow-electron-packages-types/blob/beta/docs/gep/game-events-provider.md)
-* [Overlay](https://github.com/overwolf/ow-electron-packages-types/blob/beta/docs/overlay/overlay.md)
+
+- [Recorder](https://github.com/overwolf/ow-electron-packages-types/blob/beta/docs/recorder/recorder.md)
+- [Game Events Provider](https://github.com/overwolf/ow-electron-packages-types/blob/beta/docs/gep/game-events-provider.md)
+- [Overlay](https://github.com/overwolf/ow-electron-packages-types/blob/beta/docs/overlay/overlay.md)

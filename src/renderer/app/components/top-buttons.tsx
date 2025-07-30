@@ -1,13 +1,13 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
-import AppContext from '../context/app-context';
-import { GepActions } from '../api-actions/gep-actions';
-import { AppActions } from '../api-actions/app-actions';
-import { OverlayActions } from '../api-actions/overlay-actions';
-import { OsrActions } from '../api-actions/ocr-actions';
+import React, { FC, useContext, useEffect, useState } from "react";
+import AppContext from "../context/app-context";
+import { GepActions } from "../api-actions/gep-actions";
+import { AppActions } from "../api-actions/app-actions";
+import { OverlayActions } from "../api-actions/overlay-actions";
+import { OsrActions } from "../api-actions/ocr-actions";
 
 // -----------------------------------------------------------------------------
 const TopButtons: FC = () => {
-  const [version, setVersion] = useState('');
+  const [version, setVersion] = useState("");
   const { newLogMessage } = useContext(AppContext)?.logs;
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const TopButtons: FC = () => {
   const setRequiredFeaturesClicked = async () => {
     try {
       await GepActions.setRequiredFeature();
-      newLogMessage('setRequiredFeatures ok');
+      newLogMessage("setRequiredFeatures ok");
     } catch (error) {
       newLogMessage(`setRequiredFeatures ${error}`);
     }
@@ -26,11 +26,11 @@ const TopButtons: FC = () => {
   const getInfoClicked = async () => {
     try {
       const info = await GepActions.getInfo();
-      let logResponse = typeof info === 'string' ? info : JSON.stringify(info);
+      let logResponse = typeof info === "string" ? info : JSON.stringify(info);
       newLogMessage(logResponse);
     } catch (error) {
-      newLogMessage('getInfo error');
-      alert('getInfo error' + error);
+      newLogMessage("getInfo error");
+      alert("getInfo error" + error);
     }
   };
 
@@ -38,7 +38,7 @@ const TopButtons: FC = () => {
     try {
       await OsrActions.openOSR();
     } catch (error) {
-      newLogMessage('createOSR error');
+      newLogMessage("createOSR error");
     }
   };
 
@@ -46,7 +46,7 @@ const TopButtons: FC = () => {
     try {
       await OsrActions.toggle();
     } catch (error) {
-      newLogMessage('toggle osr error');
+      newLogMessage("toggle osr error");
     }
   };
 
@@ -54,7 +54,7 @@ const TopButtons: FC = () => {
     try {
       await OsrActions.updateHotkey();
     } catch (error) {
-      newLogMessage('Update hotkey Error');
+      newLogMessage("Update hotkey Error");
     }
   };
 

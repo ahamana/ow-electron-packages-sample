@@ -1,7 +1,7 @@
-import React, { FC, useState, useContext, useEffect } from 'react';
-import AppContext from '../../context/app-context';
-import { RecordingActions } from '../../api-actions/recording-actions';
-import { AppActions } from '../../api-actions/app-actions';
+import React, { FC, useState, useContext, useEffect } from "react";
+import AppContext from "../../context/app-context";
+import { RecordingActions } from "../../api-actions/recording-actions";
+import { AppActions } from "../../api-actions/app-actions";
 
 const CaptureOutputGeneral: FC = () => {
   const {
@@ -12,7 +12,7 @@ const CaptureOutputGeneral: FC = () => {
     setSelectedDisplays,
   } = useContext(AppContext)?.recording;
 
-  const [outputPath, setOutputPath] = useState<string>('');
+  const [outputPath, setOutputPath] = useState<string>("");
 
   useEffect(() => {}, [outputPath]);
 
@@ -25,7 +25,7 @@ const CaptureOutputGeneral: FC = () => {
             await AppActions.openFolder(outputPath);
           }}
         >
-          {' '}
+          {" "}
           Open Output Directory
         </button>
       )}
@@ -38,7 +38,7 @@ const CaptureOutputGeneral: FC = () => {
           RecordingActions.setOutputPath(path);
         }}
       >
-        {' '}
+        {" "}
         Select output Directory
       </button>
       {recordingInfo &&
@@ -46,7 +46,7 @@ const CaptureOutputGeneral: FC = () => {
           let selected = selectedDisplays?.includes(m.altId);
           return (
             <li
-              style={{ backgroundColor: selected ? 'lightgreen' : 'white' }}
+              style={{ backgroundColor: selected ? "lightgreen" : "white" }}
               key={m.id}
               onClick={() => {
                 // let newDisplays = selected

@@ -1,13 +1,11 @@
-import React, { ChangeEvent } from 'react';
-import react, { FC, useContext } from 'react';
-import AppContext from '../../../context/app-context';
+import React, { ChangeEvent } from "react";
+import react, { FC, useContext } from "react";
+import AppContext from "../../../context/app-context";
 import {
   kAMDEncoderPresetAV1Array,
   kAMDEncoderRateControlArray,
-} from '../constants';
-import {
-  EncoderSettingsAMFAV1,
-} from '@overwolf/ow-electron-packages-types';
+} from "../constants";
+import { EncoderSettingsAMFAV1 } from "@overwolf/ow-electron-packages-types";
 
 const AV1EncoderSettings: FC = () => {
   const { captureSettings, setCaptureSettings } =
@@ -25,9 +23,11 @@ const AV1EncoderSettings: FC = () => {
     setCaptureSettings({ ...captureSettings, videoEncoderSettings });
   };
 
-  let supported_Encoders = ['ffmpeg_aom_av1','ffmpeg_svt_av1']
+  let supported_Encoders = ["ffmpeg_aom_av1", "ffmpeg_svt_av1"];
 
-  if (!supported_Encoders.includes(captureSettings?.videoEncoderSettings?.type)) {
+  if (
+    !supported_Encoders.includes(captureSettings?.videoEncoderSettings?.type)
+  ) {
     return <></>;
   }
 
@@ -40,7 +40,7 @@ const AV1EncoderSettings: FC = () => {
         X246 Options:
         <input
           type="text"
-          value={vidEncSettings?.ffmpeg_opts ?? ''}
+          value={vidEncSettings?.ffmpeg_opts ?? ""}
           name="ffmpeg_opts"
           onChange={onVideoEncoderSettingChanged}
         />
@@ -49,7 +49,7 @@ const AV1EncoderSettings: FC = () => {
       <label htmlFor="video-encoder-preset">Preset: </label>
       <select
         id="video-encoder-preset"
-        value={vidEncSettings?.preset || ''}
+        value={vidEncSettings?.preset || ""}
         onChange={onVideoEncoderSettingChanged}
         name="preset"
       >
@@ -62,20 +62,19 @@ const AV1EncoderSettings: FC = () => {
       <input
         id="video-encoder-cpq"
         type="text"
-        value={vidEncSettings?.cpq || ''}
+        value={vidEncSettings?.cpq || ""}
         onChange={onVideoEncoderSettingChanged}
         name="cpq"
-      >
-      </input>
+      ></input>
       <br />
       <label htmlFor="video-encoder-profile">Profile: </label>
       <select
         id="video-encoder-profile"
-        value={vidEncSettings?.profile || ''}
+        value={vidEncSettings?.profile || ""}
         onChange={onVideoEncoderSettingChanged}
         name="profile"
       >
-        {['main']?.map((profile) => (
+        {["main"]?.map((profile) => (
           <option key={profile} label={profile} value={profile} />
         ))}
       </select>
@@ -83,7 +82,7 @@ const AV1EncoderSettings: FC = () => {
       <label htmlFor="video-encoder-rate_control">Rate Control: </label>
       <select
         id="video-encoder-rate_control"
-        value={vidEncSettings?.rate_control || ''}
+        value={vidEncSettings?.rate_control || ""}
         onChange={onVideoEncoderSettingChanged}
         name="rate_control"
       >

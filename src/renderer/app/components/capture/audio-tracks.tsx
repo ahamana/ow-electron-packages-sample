@@ -1,8 +1,8 @@
-import React, { ChangeEvent, FC, useContext, useState } from 'react';
-import AppContext from '../../context/app-context';
-import { AudioTracks } from '@overwolf/ow-electron-packages-types';
-import { audioTracksArray, kAudioTracksMapping } from './constants';
-import { AudioTracksEnum } from '../../../../common/recorder/audio-trackes-enum';
+import React, { ChangeEvent, FC, useContext, useState } from "react";
+import AppContext from "../../context/app-context";
+import { AudioTracks } from "@overwolf/ow-electron-packages-types";
+import { audioTracksArray, kAudioTracksMapping } from "./constants";
+import { AudioTracksEnum } from "../../../../common/recorder/audio-trackes-enum";
 
 const AudioTracksSelection: FC = () => {
   const { recordingOptions, setRecordingOptions } =
@@ -19,27 +19,25 @@ const AudioTracksSelection: FC = () => {
 
   const onCheckBoxClick = (
     e: ChangeEvent<HTMLInputElement>,
-    track: AudioTracks,
+    track: AudioTracks
   ) => {
     let checked = e.target.checked;
     let selected = checked
       ? [...selectedTracks, track]
       : [...selectedTracks.filter((i) => i !== track)];
 
-      setSelectedTracks(selected);
+    setSelectedTracks(selected);
 
-      let multiTracks: AudioTracks;
-      for( const track of selected) {
-        multiTracks = multiTracks | track;
-      }
+    let multiTracks: AudioTracks;
+    for (const track of selected) {
+      multiTracks = multiTracks | track;
+    }
 
-      setRecordingOptions({
-        ...recordingOptions,
-        audioTrack: multiTracks,
-      });
-
+    setRecordingOptions({
+      ...recordingOptions,
+      audioTrack: multiTracks,
+    });
   };
-
 
   return (
     <label>
@@ -47,7 +45,9 @@ const AudioTracksSelection: FC = () => {
       <button
         style={{
           backgroundColor:
-            recordingOptions?.audioTrack === AudioTracksEnum.All ? 'green' : 'gray',
+            recordingOptions?.audioTrack === AudioTracksEnum.All
+              ? "green"
+              : "gray",
         }}
         onClick={() => onButtonClick(AudioTracksEnum.All)}
       >
@@ -57,14 +57,14 @@ const AudioTracksSelection: FC = () => {
         style={{
           backgroundColor:
             recordingOptions?.audioTrack === AudioTracksEnum.None
-              ? 'green'
-              : 'gray',
+              ? "green"
+              : "gray",
         }}
         onClick={() => onButtonClick(AudioTracksEnum.None)}
       >
         None
       </button>
-      <br/>
+      <br />
       {audioTracksArray?.map((track) => {
         return (
           <label key={track}>

@@ -1,8 +1,8 @@
-import React, { ChangeEvent, FC, useContext, useState } from 'react';
-import { kFileFormat } from '@overwolf/ow-electron-packages-types';
-import AppContext from '../../context/app-context';
-import CaptureVideoEncoderSettings from './capture-video-encoder-settings';
-import { outputFileFormat, fpsOptions } from './constants';
+import React, { ChangeEvent, FC, useContext, useState } from "react";
+import { kFileFormat } from "@overwolf/ow-electron-packages-types";
+import AppContext from "../../context/app-context";
+import CaptureVideoEncoderSettings from "./capture-video-encoder-settings";
+import { outputFileFormat, fpsOptions } from "./constants";
 
 const CaptureVideo: FC = () => {
   const {
@@ -14,14 +14,17 @@ const CaptureVideo: FC = () => {
 
   const onVideoSettingsChanged = (
     e: ChangeEvent,
-    type: 'string' | 'number',
+    type: "string" | "number"
   ) => {
     let { value, name } = e.target as any;
     let videoSettings = captureSettings.videoSettings;
 
-    videoSettings[name] = type === 'number'
-      ? parseInt(value) ? parseInt(value) : videoSettings[name]
-      : value;
+    videoSettings[name] =
+      type === "number"
+        ? parseInt(value)
+          ? parseInt(value)
+          : videoSettings[name]
+        : value;
 
     setCaptureSettings({
       ...captureSettings,
@@ -36,7 +39,9 @@ const CaptureVideo: FC = () => {
     }
 
     let videoSettings = captureSettings?.videoSettings;
-    videoSettings[name] = parseInt(value) ? parseInt(value) : videoSettings[name];
+    videoSettings[name] = parseInt(value)
+      ? parseInt(value)
+      : videoSettings[name];
     setCaptureSettings({
       ...captureSettings,
       videoSettings,
@@ -83,38 +88,38 @@ const CaptureVideo: FC = () => {
       </label>
       <br />
       <label>
-        Base Width: 
+        Base Width:
         <input
           type="text"
           name="baseWidth"
-          onChange={(e) => onVideoSettingsChanged(e, 'number')}
-          value={captureSettings?.videoSettings?.baseWidth ?? ''}
+          onChange={(e) => onVideoSettingsChanged(e, "number")}
+          value={captureSettings?.videoSettings?.baseWidth ?? ""}
         />
         <br />
-        Base Height: 
+        Base Height:
         <input
           type="text"
           name="baseHeight"
-          onChange={(e) => onVideoSettingsChanged(e, 'number')}
-          value={captureSettings?.videoSettings?.baseHeight ?? ''}
+          onChange={(e) => onVideoSettingsChanged(e, "number")}
+          value={captureSettings?.videoSettings?.baseHeight ?? ""}
         />
       </label>
       <br />
       <label>
-        Output Width: 
+        Output Width:
         <input
           type="text"
           name="outputWidth"
-          onChange={(e) => onVideoSettingsChanged(e, 'number')}
-          value={captureSettings?.videoSettings?.outputWidth ?? ''}
+          onChange={(e) => onVideoSettingsChanged(e, "number")}
+          value={captureSettings?.videoSettings?.outputWidth ?? ""}
         />
         <br />
-        Output Height: 
+        Output Height:
         <input
           type="text"
           name="outputHeight"
-          onChange={(e) => onVideoSettingsChanged(e, 'number')}
-          value={captureSettings?.videoSettings?.outputHeight ?? ''}
+          onChange={(e) => onVideoSettingsChanged(e, "number")}
+          value={captureSettings?.videoSettings?.outputHeight ?? ""}
         />
       </label>
       <br />

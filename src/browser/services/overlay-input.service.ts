@@ -1,6 +1,6 @@
-import { app, ipcMain } from 'electron';
-import { OverlayService } from './overlay.service';
-import { overwolf } from '@overwolf/ow-electron';
+import { app, ipcMain } from "electron";
+import { OverlayService } from "./overlay.service";
+import { overwolf } from "@overwolf/ow-electron";
 import {
   ExclusiveInputOptions,
   GameInfo,
@@ -11,8 +11,8 @@ import {
   OverlayWindowOptions,
   PassthroughType,
   ZOrderType,
-} from '@overwolf/ow-electron-packages-types';
-import path from 'path';
+} from "@overwolf/ow-electron-packages-types";
+import path from "path";
 
 const owElectron = app as overwolf.OverwolfApp;
 
@@ -25,15 +25,15 @@ export class OverlayInputService {
   private exclusiveModeBackgroundWindow: OverlayBrowserWindow = null;
 
   private inputOptions: ExclusiveInputOptions = {
-    backgroundColor: 'rgba(12, 12, 12, 0.5)',
+    backgroundColor: "rgba(12, 12, 12, 0.5)",
   };
 
   public exclusiveModeAsWindow = false;
   public mode: ExclusiveHotKeyMode = ExclusiveHotKeyMode.Toggle;
 
   constructor(overlayService: OverlayService) {
-    overlayService.on('ready', this.init.bind(this));
-    this.registerIPC()
+    overlayService.on("ready", this.init.bind(this));
+    this.registerIPC();
   }
 
   /**
@@ -50,27 +50,27 @@ export class OverlayInputService {
   private init() {
     this.registerExclusiveModeHotkey();
 
-    this.overlayApi.on('game-injected', (gameInfo) => {
+    this.overlayApi.on("game-injected", (gameInfo) => {
       this.onNewGameInjected(gameInfo);
     });
 
-    this.overlayApi.on('game-exit', (gameInfo, wasInjected) => {
+    this.overlayApi.on("game-exit", (gameInfo, wasInjected) => {
       if (wasInjected) {
         this.onGameExit();
       }
     });
 
-    this.overlayApi.on('game-window-changed', (window, gameInfo, reason) => {
+    this.overlayApi.on("game-window-changed", (window, gameInfo, reason) => {
       this.onUpdateGameWindow(window);
     });
 
-    this.overlayApi.on('game-input-interception-changed', (info) => {
+    this.overlayApi.on("game-input-interception-changed", (info) => {
       if (info.canInterceptInput === false) {
         this.assureExclusiveModeWindow();
       }
     });
 
-    this.overlayApi.on('game-input-exclusive-mode-changed', (info) => {
+    this.overlayApi.on("game-input-exclusive-mode-changed", (info) => {
       this.onGameExclusiveModeChanged(info);
     });
   }
@@ -78,7 +78,7 @@ export class OverlayInputService {
   private registerExclusiveModeHotkey() {
     this.overlayApi.hotkeys.register(
       {
-        name: 'ExclusiveMode',
+        name: "ExclusiveMode",
         keyCode: 9, // TAB
         modifiers: {
           ctrl: true,
@@ -86,7 +86,7 @@ export class OverlayInputService {
         passthrough: false,
       },
       (hotkey, state) => {
-        this.onExclusiveModeHotkey(state == 'pressed');
+        this.onExclusiveModeHotkey(state == "pressed");
       }
     );
   }
@@ -101,12 +101,12 @@ export class OverlayInputService {
     const height = activeGame?.gameWindowInfo?.size.height || 500;
 
     const options: OverlayWindowOptions = {
-      name: 'exclusiveModeBackground',
+      name: "exclusiveModeBackground",
       height: height,
       width: width,
       show: true,
-      passthrough: 'passThrough',
-      zOrder: 'bottomMost',
+      passthrough: "passThrough",
+      zOrder: "bottomMost",
       transparent: true,
       resizable: false,
       webPreferences: {
@@ -123,11 +123,11 @@ export class OverlayInputService {
     this.registerOverlayIpc();
 
     await this.exclusiveModeBackgroundWindow.window.loadURL(
-      path.join(__dirname, '../exclusive/exclusive.html')
+      path.join(__dirname, "../exclusive/exclusive.html")
     );
 
     this.exclusiveModeBackgroundWindow.window.webContents.openDevTools({
-      mode: 'detach',
+      mode: "detach",
     });
 
     this.exclusiveModeBackgroundWindow.window.hide();
@@ -136,10 +136,9 @@ export class OverlayInputService {
   private registerOverlayIpc() {
     const windowIpc = this.exclusiveModeBackgroundWindow.window.webContents.ipc;
 
-    windowIpc.on('HIDE_EXCLUSIVE', (e) => {
+    windowIpc.on("HIDE_EXCLUSIVE", (e) => {
       this.exclusiveModeBackgroundWindow.window.hide();
     });
-    
   }
 
   onGameExclusiveModeChanged(info: GameInputInterception) {
@@ -157,7 +156,7 @@ export class OverlayInputService {
     }
 
     this.exclusiveModeBackgroundWindow.window.webContents.send(
-      'EXCLUSIVE_MODE',
+      "EXCLUSIVE_MODE",
       info.exclusiveMode == true
     );
   }
@@ -234,7 +233,7 @@ export class OverlayInputService {
 
     if (this.exclusiveModeAsWindow) {
       this.overlayApi?.enterExclusiveMode({
-        backgroundColor: 'rgba(0,0,0,0)',
+        backgroundColor: "rgba(0,0,0,0)",
       });
     } else {
       this.exclusiveModeBackgroundWindow?.window.hide();
@@ -247,12 +246,12 @@ export class OverlayInputService {
   }
 
   private registerIPC() {
-    ipcMain.handle('updateExclusiveOptions', async (sender, options) => {
+    ipcMain.handle("updateExclusiveOptions", async (sender, options) => {
       this.updateExclusiveModeOptions(options);
     });
 
-    ipcMain.handle('EXCLUSIVE_TYPE', async (sender, type) => {
-      if (type === 'customWindow') {
+    ipcMain.handle("EXCLUSIVE_TYPE", async (sender, type) => {
+      if (type === "customWindow") {
         this.exclusiveModeAsWindow = true;
         return;
       }
@@ -261,9 +260,8 @@ export class OverlayInputService {
       this.exclusiveModeAsWindow = false;
     });
 
-    ipcMain.handle('EXCLUSIVE_BEHAVIOR', async (sender, behavior) => {
-
-      if (behavior === 'toggle') {
+    ipcMain.handle("EXCLUSIVE_BEHAVIOR", async (sender, behavior) => {
+      if (behavior === "toggle") {
         this.mode = ExclusiveHotKeyMode.Toggle;
         return;
       }

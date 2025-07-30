@@ -1,13 +1,13 @@
-import { app, ipcMain } from 'electron';
-import { overwolf } from '@overwolf/ow-electron';
+import { app, ipcMain } from "electron";
+import { overwolf } from "@overwolf/ow-electron";
 import {
   ExclusiveInputOptions,
   IOverwolfOverlayApi,
   PassthroughType,
   ZOrderType,
-} from '@overwolf/ow-electron-packages-types';
-import EventEmitter from 'events';
-import { OverlayService } from './overlay.service';
+} from "@overwolf/ow-electron-packages-types";
+import EventEmitter from "events";
+import { OverlayService } from "./overlay.service";
 
 const owElectron = app as overwolf.OverwolfApp;
 
@@ -22,7 +22,7 @@ export class OverlayHotkeysService extends EventEmitter {
     super();
 
     this.registerIPC();
-    overlayService.on('ready', this.installHotKeys.bind(this));
+    overlayService.on("ready", this.installHotKeys.bind(this));
   }
 
   /**
@@ -35,7 +35,7 @@ export class OverlayHotkeysService extends EventEmitter {
     }
 
     // update existing hot key...
-    const hotkey = 'tabHotKeyPassThrow';
+    const hotkey = "tabHotKeyPassThrow";
     const passThrowHotKey = this.overlayApi.hotkeys
       .all()
       .find((h) => h.name == hotkey);
@@ -51,7 +51,7 @@ export class OverlayHotkeysService extends EventEmitter {
     // non blocked hot key
     this.overlayApi.hotkeys.register(
       {
-        name: 'tabHotKeyPassThrow',
+        name: "tabHotKeyPassThrow",
         keyCode: 9, // TAB
 
         passthrough: true,
@@ -64,7 +64,7 @@ export class OverlayHotkeysService extends EventEmitter {
     // reset OSR passthrough
     this.overlayApi.hotkeys.register(
       {
-        name: 'resetPassThrow',
+        name: "resetPassThrow",
         keyCode: 82, // r
         modifiers: {
           ctrl: true,
@@ -74,7 +74,7 @@ export class OverlayHotkeysService extends EventEmitter {
       (hotkey, state) => {
         console.info(`on hotkey '${hotkey.name}' `, state);
 
-        if (state == 'pressed') {
+        if (state == "pressed") {
           this.resetOSRPassthrough();
         }
       }
@@ -83,7 +83,7 @@ export class OverlayHotkeysService extends EventEmitter {
     // reset zOrder
     this.overlayApi.hotkeys.register(
       {
-        name: 'resetzOrder',
+        name: "resetzOrder",
         keyCode: 90, // z
         modifiers: {
           ctrl: true,
@@ -93,7 +93,7 @@ export class OverlayHotkeysService extends EventEmitter {
       (hotkey, state) => {
         console.info(`on hotkey '${hotkey.name}' `, state);
 
-        if (state == 'pressed') {
+        if (state == "pressed") {
           this.resetZOrder();
         }
       }
@@ -105,7 +105,7 @@ export class OverlayHotkeysService extends EventEmitter {
 
     this.overlayApi?.getAllWindows()?.forEach((w) => {
       const overlayOptions = w.overlayOptions;
-      overlayOptions.passthrough = 'noPassThrough';
+      overlayOptions.passthrough = "noPassThrough";
     });
   }
 
@@ -114,13 +114,13 @@ export class OverlayHotkeysService extends EventEmitter {
 
     this.overlayApi.getAllWindows()?.forEach((w) => {
       const overlayOptions = w.overlayOptions;
-      overlayOptions.zOrder = 'default';
+      overlayOptions.zOrder = "default";
     });
   }
 
   /** */
   private log(message: string, ...args: any[]) {
-    this.emit('log', message, ...args);
+    this.emit("log", message, ...args);
   }
 
   //----------------------------------------------------------------------------
@@ -129,7 +129,7 @@ export class OverlayHotkeysService extends EventEmitter {
   }
 
   private registerIPC() {
-    ipcMain.handle('updateHotkey', async () => {
+    ipcMain.handle("updateHotkey", async () => {
       this.updateHotkey();
     });
   }

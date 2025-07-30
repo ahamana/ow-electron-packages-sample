@@ -1,11 +1,11 @@
-import React, { ChangeEvent, FC, useContext } from 'react';
-import AppContext from '../../../context/app-context';
+import React, { ChangeEvent, FC, useContext } from "react";
+import AppContext from "../../../context/app-context";
 import {
   kX264EncoderPresetArray,
   kX264EncoderTuneArray,
   kX264EncoderProfileArray,
-} from '../constants';
-import { EncoderSettingsX264 } from '@overwolf/ow-electron-packages-types';
+} from "../constants";
+import { EncoderSettingsX264 } from "@overwolf/ow-electron-packages-types";
 
 const X264EncoderSettings: FC = () => {
   const { captureSettings, setCaptureSettings } =
@@ -23,7 +23,7 @@ const X264EncoderSettings: FC = () => {
     setCaptureSettings({ ...captureSettings, videoEncoderSettings });
   };
 
-  if (captureSettings?.videoEncoderSettings?.type !== 'obs_x264') {
+  if (captureSettings?.videoEncoderSettings?.type !== "obs_x264") {
     return <></>;
   }
 
@@ -36,7 +36,7 @@ const X264EncoderSettings: FC = () => {
         X246 Options:
         <input
           type="text"
-          value={vidEncSettings?.x264opts ?? ''}
+          value={vidEncSettings?.x264opts ?? ""}
           name="x264opts"
           onChange={onVideoEncoderSettingChanged}
         />
@@ -55,7 +55,7 @@ const X264EncoderSettings: FC = () => {
       <label htmlFor="video-encoder-preset">preset: </label>
       <select
         id="video-encoder-preset"
-        value={vidEncSettings?.preset || ''}
+        value={vidEncSettings?.preset || ""}
         onChange={onVideoEncoderSettingChanged}
         name="preset"
       >
@@ -67,7 +67,7 @@ const X264EncoderSettings: FC = () => {
       <label htmlFor="video-encoder-tune">Tune: </label>
       <select
         id="video-encoder-tune"
-        value={vidEncSettings?.tune || ''}
+        value={vidEncSettings?.tune || ""}
         onChange={onVideoEncoderSettingChanged}
         name="tune"
       >
@@ -79,7 +79,7 @@ const X264EncoderSettings: FC = () => {
       <label htmlFor="video-encoder-profile">Profile: </label>
       <select
         id="video-encoder-profile"
-        value={vidEncSettings?.profile || ''}
+        value={vidEncSettings?.profile || ""}
         onChange={onVideoEncoderSettingChanged}
         name="profile"
       >
@@ -89,7 +89,6 @@ const X264EncoderSettings: FC = () => {
       </select>
     </>
   );
-
 };
 
 export default X264EncoderSettings;

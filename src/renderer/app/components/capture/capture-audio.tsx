@@ -1,11 +1,9 @@
-import React, { ChangeEvent, FC, useContext } from 'react';
-import {
-  kKnownAudioEncodersTypes,
-} from '@overwolf/ow-electron-packages-types';
-import AppContext from '../../context/app-context';
-import { audioSampleRate } from './constants';
-import AudioTracksSelection from './audio-tracks';
-import AudioDevices from './audio-devices';
+import React, { ChangeEvent, FC, useContext } from "react";
+import { kKnownAudioEncodersTypes } from "@overwolf/ow-electron-packages-types";
+import AppContext from "../../context/app-context";
+import { audioSampleRate } from "./constants";
+import AudioTracksSelection from "./audio-tracks";
+import AudioDevices from "./audio-devices";
 
 const CaptureAudio: FC = () => {
   const {

@@ -1,19 +1,19 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
-import InputSwitch from './input-switch';
-import { OverlayActions } from '../api-actions/overlay-actions';
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
+import InputSwitch from "./input-switch";
+import { OverlayActions } from "../api-actions/overlay-actions";
 
-type HotKeyBehaviorTypes = 'toggle' | 'pressed';
-type ExclusiveModeTypes = 'native' | 'customWindow';
+type HotKeyBehaviorTypes = "toggle" | "pressed";
+type ExclusiveModeTypes = "native" | "customWindow";
 
 // -----------------------------------------------------------------------------
 const InputEXclusive: FC = () => {
-  const [opacityValue, setOpacityValue] = useState('0.5');
-  const [animationDuration, setAnimationDuration] = useState('100');
-  const [colorPicker, setColorPicker] = useState('#0c0c0c');
+  const [opacityValue, setOpacityValue] = useState("0.5");
+  const [animationDuration, setAnimationDuration] = useState("100");
+  const [colorPicker, setColorPicker] = useState("#0c0c0c");
   const [exclusiveTypeEnabled, setExclusiveType] =
-    useState<ExclusiveModeTypes>('native');
+    useState<ExclusiveModeTypes>("native");
   const [hotKeyType, setHotKeyEnabled] =
-    useState<HotKeyBehaviorTypes>('toggle');
+    useState<HotKeyBehaviorTypes>("toggle");
 
   const changeColorPicker = (e: ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
@@ -25,8 +25,7 @@ const InputEXclusive: FC = () => {
   };
 
   const changeOpacityValue = (e: ChangeEvent<HTMLInputElement>) => {
-
-    let value = parseInt(e.target.value) ? e.target.value: opacityValue ;
+    let value = parseInt(e.target.value) ? e.target.value : opacityValue;
     if (value === opacityValue) {
       return;
     }
@@ -35,7 +34,7 @@ const InputEXclusive: FC = () => {
   };
 
   const animationDurationValue = (e: ChangeEvent<HTMLInputElement>) => {
-    let value = parseInt(e.target.value) ? e.target.value: animationDuration ;
+    let value = parseInt(e.target.value) ? e.target.value : animationDuration;
     if (value === animationDuration) {
       return;
     }
@@ -46,7 +45,7 @@ const InputEXclusive: FC = () => {
   const changeExclusiveType = (e: ChangeEvent<HTMLInputElement>): void => {
     let value = e.target.checked;
     let returnV: ExclusiveModeTypes =
-      value === true ? 'native' : 'customWindow';
+      value === true ? "native" : "customWindow";
 
     setExclusiveType(returnV);
     OverlayActions.setExclusiveModeType(returnV);
@@ -55,7 +54,7 @@ const InputEXclusive: FC = () => {
   const changeHotkey = (e: ChangeEvent<HTMLInputElement>) => {
     let checked = e.target.checked;
     let returnValue: HotKeyBehaviorTypes =
-      checked === true ? 'toggle' : 'pressed';
+      checked === true ? "toggle" : "pressed";
 
     setHotKeyEnabled(returnValue);
     OverlayActions.setExclusiveModeHotkeyBehavior(returnValue);
@@ -84,13 +83,13 @@ const InputEXclusive: FC = () => {
       <h2>Input Exclusive:</h2>
       <div
         style={{
-          width: '400px',
-          height: '300px',
-          border: '1px solid',
-          background: 'transparent',
+          width: "400px",
+          height: "300px",
+          border: "1px solid",
+          background: "transparent",
         }}
       >
-        <label style={{ display: 'block', marginBottom: '10px' }}>
+        <label style={{ display: "block", marginBottom: "10px" }}>
           Background Color
           <input
             type="color"
@@ -99,7 +98,7 @@ const InputEXclusive: FC = () => {
             onChange={changeColorPicker}
           />
         </label>
-        <label style={{ display: 'block', marginBottom: '10px' }}>
+        <label style={{ display: "block", marginBottom: "10px" }}>
           <div>Opacity</div>
           <input
             type="range"
@@ -118,7 +117,7 @@ const InputEXclusive: FC = () => {
             onChange={changeOpacityValue}
           />
         </label>
-        <label style={{ display: 'block', marginBottom: '10px' }}>
+        <label style={{ display: "block", marginBottom: "10px" }}>
           <div>Animation Duration</div>
           <input
             type="range"
@@ -137,19 +136,19 @@ const InputEXclusive: FC = () => {
           />
         </label>
         <InputSwitch
-          title={'Exclusive Type'}
+          title={"Exclusive Type"}
           onChange={changeExclusiveType}
-          value={exclusiveTypeEnabled === 'native'}
-          onText={'Native'}
-          offText={'As Window'}
+          value={exclusiveTypeEnabled === "native"}
+          onText={"Native"}
+          offText={"As Window"}
         />
         <br />
         <InputSwitch
-          title={'Hotkey Behavior'}
+          title={"Hotkey Behavior"}
           onChange={changeHotkey}
-          value={hotKeyType === 'toggle'}
-          onText={'toggle'}
-          offText={'pressed'}
+          value={hotKeyType === "toggle"}
+          onText={"toggle"}
+          offText={"pressed"}
         />
       </div>
     </div>

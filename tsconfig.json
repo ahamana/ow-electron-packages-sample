@@ -17,10 +17,5 @@
     "/node_modules/@overwolf/ow-electron-packages-types",
     "/node_modules/@types"
   ],
-  "exclude": [
-    "node_modules",
-    "test",
-    "dist",
-    "**/*spec.ts"
-  ],
+  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }

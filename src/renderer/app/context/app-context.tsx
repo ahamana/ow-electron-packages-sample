@@ -6,10 +6,10 @@ import {
   RecordingInformation,
   RecordingOptions,
   ReplayOptions,
-} from '@overwolf/ow-electron-packages-types';
-import React, { createContext } from 'react';
-import { UiCaptureSettings } from './app-context.provider';
-import { RecordingStatus } from '../../../common/recorder/recording-status';
+} from "@overwolf/ow-electron-packages-types";
+import React, { createContext } from "react";
+import { UiCaptureSettings } from "./app-context.provider";
+import { RecordingStatus } from "../../../common/recorder/recording-status";
 
 interface LogContext {
   logMessages?: string[];
@@ -35,7 +35,7 @@ interface RecordingContext {
   setCaptureSettings?: (settings: UiCaptureSettings) => void;
   setReplayCaptureOptions?: (options: CaptureReplayOptions) => void;
   setReplayOptions?: (options: ReplayOptions) => void;
-  setSelectedDisplays? :(displayAltId: string) => void;
+  setSelectedDisplays?: (displayAltId: string) => void;
 }
 
 export type TAppContext = {

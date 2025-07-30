@@ -1,14 +1,14 @@
-import { kGameIds } from '@overwolf/ow-electron-packages-types/game-list';
-import { RecordingService } from '../services/recording.service';
-import { GameEventsService } from '../services/gep.service';
+import { kGameIds } from "@overwolf/ow-electron-packages-types/game-list";
+import { RecordingService } from "../services/recording.service";
+import { GameEventsService } from "../services/gep.service";
 
-const kRequiredFeatures = ['kill', 'death'];
+const kRequiredFeatures = ["kill", "death"];
 export class LolGameListener {
   private gameRunning = false;
   private gameId = kGameIds.LeagueofLegends;
   constructor(
     private readonly recorderService: RecordingService,
-    private readonly gepService: GameEventsService,
+    private readonly gepService: GameEventsService
   ) {}
 
   public async onGameLaunched(gameId: number) {

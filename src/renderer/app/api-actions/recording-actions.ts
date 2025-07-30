@@ -9,8 +9,8 @@ import {
   RecordingOptions,
   ReplayOptions,
   kFileFormat,
-} from '@overwolf/ow-electron-packages-types';
-import { RecordingStatus } from '../../../common/recorder/recording-status';
+} from "@overwolf/ow-electron-packages-types";
+import { RecordingStatus } from "../../../common/recorder/recording-status";
 
 /*
  UI binding
@@ -65,7 +65,7 @@ export class RecordingActions {
   };
 
   static setCaptureSettingsOptions = async (
-    options: CaptureSettingsOptions,
+    options: CaptureSettingsOptions
   ) => {
     window.recorder.setCaptureSettingsOptions(options);
   };
@@ -95,19 +95,19 @@ export class RecordingActions {
   };
 
   static onCaptureSettingsChanged = async (
-    callback: (settings: CaptureSettings) => void,
+    callback: (settings: CaptureSettings) => void
   ) => {
     window.recorder.onCaptureSettingsChanged(callback);
   };
 
   static onRecordingStatusChanged = async (
-    callback: (status: RecordingStatus) => void,
+    callback: (status: RecordingStatus) => void
   ) => {
     window.recorder.onRecordingStatusChanged(callback);
   };
 
   static onRecordingStatsChanged = async (
-    callback: (status: RecorderStats) => void,
+    callback: (status: RecorderStats) => void
   ) => {
     window.recorder.onRecordingStatsChanged(callback);
   };

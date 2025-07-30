@@ -26,10 +26,7 @@
     "sourceType": "module",
     "project": "tsconfig.json"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint"
-  ],
+  "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
@@ -39,14 +36,8 @@
     "@typescript-eslint/type-annotation-spacing": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "no-use-before-define": "off",
-    "semi": [
-      "error",
-      "always"
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"],
     "no-unused-vars": "warn",
     "space-before-function-paren": "off",
     "object-curly-spacing": "off",
